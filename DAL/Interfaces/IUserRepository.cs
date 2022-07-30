@@ -1,0 +1,16 @@
+﻿using DATA;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DAL.Interfaces
+{
+    public interface IUserRepository
+    {
+        Task<bool> RegisterUserAsync(User userData);
+        Task<User> GetUserDataAsync(Guid userID);
+        Task<bool> CheckUserExistAsync(string email, string password);
+    }
+}
