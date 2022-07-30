@@ -59,8 +59,7 @@ namespace BLL.Classes
             {
                 using var scope = _scopeFactory.CreateScope();
                 var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
-                await userRepository.RegisterUserAsync(userData);
-                isSuccess = true;
+                isSuccess= await userRepository.RegisterUserAsync(userData);
                 return isSuccess;
             }
             catch (Exception ex)

@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\BombaRestAPI\\BombaRestAPI.csproj": {}
+    "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\BombaRestAPI\\BombaRestAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\BLL\\BLL.csproj": {
+    "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\BLL\\BLL.csproj",
+        "projectUniqueName": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj",
         "projectName": "BLL",
-        "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\BLL\\BLL.csproj",
-        "packagesPath": "C:\\Users\\97254\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\BLL\\obj\\",
+        "projectPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj",
+        "packagesPath": "C:\\Users\\roish\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\BLL\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\97254\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\roish\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,17 +22,19 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://etoro.jfrog.io/artifactory/api/nuget/nuget-central": {},
+          "https://etoro.jfrog.io/artifactory/api/nuget/v3/nuget-central": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DAL\\DAL.csproj": {
-                "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DAL\\DAL.csproj"
+              "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj"
               },
-              "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DATA\\DATA.csproj": {
-                "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DATA\\DATA.csproj"
+              "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj": {
+                "projectPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj"
               }
             }
           }
@@ -71,25 +69,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.107\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\BombaRestAPI\\BombaRestAPI.csproj": {
+    "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\BombaRestAPI\\BombaRestAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\BombaRestAPI\\BombaRestAPI.csproj",
+        "projectUniqueName": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\BombaRestAPI\\BombaRestAPI.csproj",
         "projectName": "BombaRestAPI",
-        "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\BombaRestAPI\\BombaRestAPI.csproj",
-        "packagesPath": "C:\\Users\\97254\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\BombaRestAPI\\obj\\",
+        "projectPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\BombaRestAPI\\BombaRestAPI.csproj",
+        "packagesPath": "C:\\Users\\roish\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\BombaRestAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\97254\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\roish\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -97,17 +91,19 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://etoro.jfrog.io/artifactory/api/nuget/nuget-central": {},
+          "https://etoro.jfrog.io/artifactory/api/nuget/v3/nuget-central": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\BLL\\BLL.csproj": {
-                "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\BLL\\BLL.csproj"
+              "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj": {
+                "projectPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj"
               },
-              "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DAL\\DAL.csproj": {
-                "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DAL\\DAL.csproj"
+              "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj"
               }
             }
           }
@@ -155,25 +151,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.107\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DAL\\DAL.csproj": {
+    "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DAL\\DAL.csproj",
+        "projectUniqueName": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DAL\\DAL.csproj",
-        "packagesPath": "C:\\Users\\97254\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DAL\\obj\\",
+        "projectPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj",
+        "packagesPath": "C:\\Users\\roish\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DAL\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\97254\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\roish\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -181,14 +173,16 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://etoro.jfrog.io/artifactory/api/nuget/nuget-central": {},
+          "https://etoro.jfrog.io/artifactory/api/nuget/v3/nuget-central": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DATA\\DATA.csproj": {
-                "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DATA\\DATA.csproj"
+              "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj": {
+                "projectPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj"
               }
             }
           }
@@ -233,25 +227,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.107\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DATA\\DATA.csproj": {
+    "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DATA\\DATA.csproj",
+        "projectUniqueName": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj",
         "projectName": "DATA",
-        "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DATA\\DATA.csproj",
-        "packagesPath": "C:\\Users\\97254\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DATA\\obj\\",
+        "projectPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj",
+        "packagesPath": "C:\\Users\\roish\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\roish\\Source\\Repos\\BombaBackend\\DATA\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\97254\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\roish\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -259,7 +249,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://etoro.jfrog.io/artifactory/api/nuget/nuget-central": {},
+          "https://etoro.jfrog.io/artifactory/api/nuget/v3/nuget-central": {}
         },
         "frameworks": {
           "net5.0": {
@@ -297,7 +289,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.107\\RuntimeIdentifierGraph.json"
         }
       }
     }
