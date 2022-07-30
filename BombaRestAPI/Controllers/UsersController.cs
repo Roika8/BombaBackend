@@ -29,6 +29,7 @@ namespace BombaRestAPI.Controllers
         {
             try
             {
+                //
                 bool res = await _userService.RegisterUser(userData);
                 return res ? Ok() : BadRequest();
             }
