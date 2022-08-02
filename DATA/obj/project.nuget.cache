@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rGMWgQgCijZmy+tluM7cuazWcOECL1gj12b0yZSfIZgjNIx3cetHHCtGb1O0mC0S76WN8OMruH0hjNFcOx2F5w==",
+  "dgSpecHash": "Yk/ocqehPXpmH9GEuIOOMUUmD8RQEFf87l9/OXXmUaAALTzwuUsr6pvyBPw1/wZu3oncOmp1swH5BRMeWV0JUQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DATA\\DATA.csproj",
+  "projectFilePath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\97254\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.0\\microsoft.entityframeworkcore.abstractions.5.0.0.nupkg.sha512"
   ],

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ED5fBkW3LcGffiP/QFFhTfM5TgqWuoBKK+1K5/Leo20qks8OMmCKjsfJP53CANVD8Jv+LkN+7zFI9xMdGYqpWw==",
+  "dgSpecHash": "8wa5uEmJibASEs8LY1D1w/8klxZoY2jCHQplssIyZvi20AbGUSFfIQDrHSg4WELfVlNDOKxoa1iA3XS4g42j0w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\stockASP\\DAL\\DAL.csproj",
+  "projectFilePath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\97254\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\97254\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
