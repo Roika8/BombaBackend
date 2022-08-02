@@ -35,8 +35,7 @@ namespace DAL.Repositories
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                return false;
+                throw new Exception(e.InnerException.Message);
             }
 
         }
@@ -63,7 +62,7 @@ namespace DAL.Repositories
             {
                 User foundUser = _dbContext.Users.Where(user => user.Email == email && user.Password == password)
                                   .ToList().FirstOrDefault();
-                
+
                 return foundUser != null;
             }
             catch (Exception ex)

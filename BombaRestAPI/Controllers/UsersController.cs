@@ -25,10 +25,11 @@ namespace BombaRestAPI.Controllers
 
         [Route("AddUser")]
         [HttpPost]
-        public async Task<IActionResult> AddUser([FromBody] User userData)
+        public async Task<IActionResult> AddUser(User userData)
         {
             try
             {
+                userData.UserID = Guid.NewGuid();
                 bool res = await _userService.RegisterUser(userData);
                 return res ? Ok() : BadRequest();
             }

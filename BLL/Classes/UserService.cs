@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BLL.Classes
@@ -18,7 +19,14 @@ namespace BLL.Classes
         {
             _scopeFactory = scopeFactory;
         }
-
+        #region Private methoods
+        private static bool ValidateUserData(User userData)
+        {
+            Regex regex = new(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(userData.Email);
+            return match.Success && userData.Password.Length > 6;
+        }
+        #endregion
         #region Public methoods
 
         public async Task<User> GetUser(Guid userID)
@@ -53,20 +61,19 @@ namespace BLL.Classes
 
         public async Task<bool> RegisterUser(User userData)
         {
-            var isSuccess = false;
-
             try
             {
+                bool isSuccess = false;
+                if (!ValidateUserData(userData)) throw new Exception("Email or password is not valid");
                 using var scope = _scopeFactory.CreateScope();
                 var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
-                await userRepository.RegisterUserAsync(userData);
-                isSuccess = true;
+                isSuccess = await userRepository.RegisterUserAsync(userData);
+
                 return isSuccess;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return isSuccess;
+                throw new Exception(ex.Message);
             }
         }
         #endregion

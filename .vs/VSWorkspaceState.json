@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\BombaRestAPI",
+    "\\DAL",
+    "\\DAL\\Repositories"
   ],
+  "SelectedNode": "\\DAL\\Repositories\\UserRepository.cs",
   "PreviewInSolutionExplorer": false
 }
