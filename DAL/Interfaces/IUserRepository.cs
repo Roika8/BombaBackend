@@ -9,7 +9,7 @@ namespace DAL.Interfaces
 {
     public interface IUserRepository
     {
-        Task<bool> RegisterUserAsync(User userData);
+        Task<Guid> RegisterUserAsync(User userData);
         Task<User> GetUserDataAsync(Guid userID);
         Task<bool> CheckUserExistAsync(string email, string password);
     }

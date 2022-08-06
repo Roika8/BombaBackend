@@ -22,3 +22,15 @@ C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים של�
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\stockASP\DATA\obj\Debug\net5.0\refint\DATA.dll
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\stockASP\DATA\obj\Debug\net5.0\DATA.pdb
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\stockASP\DATA\obj\Debug\net5.0\ref\DATA.dll
+C:\Users\97254\source\repos\BombaBackend\DATA\obj\Debug\net5.0\DATA.csproj.AssemblyReference.cache
+C:\Users\97254\source\repos\BombaBackend\DATA\obj\Debug\net5.0\DATA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\97254\source\repos\BombaBackend\DATA\obj\Debug\net5.0\DATA.AssemblyInfoInputs.cache
+C:\Users\97254\source\repos\BombaBackend\DATA\obj\Debug\net5.0\DATA.AssemblyInfo.cs
+C:\Users\97254\source\repos\BombaBackend\DATA\obj\Debug\net5.0\DATA.csproj.CoreCompileInputs.cache
+C:\Users\97254\source\repos\BombaBackend\DATA\obj\Debug\net5.0\DATA.dll
+C:\Users\97254\source\repos\BombaBackend\DATA\obj\Debug\net5.0\refint\DATA.dll
+C:\Users\97254\source\repos\BombaBackend\DATA\obj\Debug\net5.0\DATA.pdb
+C:\Users\97254\source\repos\BombaBackend\DATA\bin\Debug\net5.0\DATA.deps.json
+C:\Users\97254\source\repos\BombaBackend\DATA\bin\Debug\net5.0\DATA.dll
+C:\Users\97254\source\repos\BombaBackend\DATA\bin\Debug\net5.0\DATA.pdb
+C:\Users\97254\source\repos\BombaBackend\DATA\obj\Debug\net5.0\ref\DATA.dll

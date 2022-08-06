@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +11,7 @@ namespace DATA
         public int PortfolioID { get; set; }
 
         [ForeignKey("UserID")]
-        public User User { get; set; }
+        public Guid UserID { get; set; }
 
         public ICollection<PortfolioInstrument> Instruments { get; set; }
     }

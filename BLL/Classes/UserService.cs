@@ -63,13 +63,15 @@ namespace BLL.Classes
         {
             try
             {
-                bool isSuccess = false;
-                if (!ValidateUserData(userData)) throw new Exception("Email or password is not valid");
                 using var scope = _scopeFactory.CreateScope();
                 var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
-                isSuccess = await userRepository.RegisterUserAsync(userData);
+                var portfolioRepository = scope.ServiceProvider.GetRequiredService<IPortfolioRepository>();
 
-                return isSuccess;
+                if (!ValidateUserData(userData)) throw new Exception("Email or password is not valid");
+
+                Guid userID = await userRepository.RegisterUserAsync(userData);
+                int portfolioID = await portfolioRepository.CreatePortfolioAsync(userID);
+                return portfolioID != 0;
             }
             catch (Exception ex)
             {

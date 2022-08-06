@@ -25,15 +25,11 @@ namespace BombaAPI.Controllers
 
         [Route("AddPortfolio")]
         [HttpPost]
-        public async Task<IActionResult> AddPortfolio([FromBody] Portfolio portfolio)
+        public async Task<IActionResult> AddInstrumentToPortfolio(PortfolioInstrument portfolioInstrument, Guid userID)
         {
             try
             {
-                bool res = await _mainPortfolioService.AddPortfolio(new Portfolio
-                {
-                    Instruments = portfolio.Instruments,
-                    User = portfolio.User,
-                });
+                bool res = await _mainPortfolioService.AddInstrumentToPortfolio(portfolioInstrument, userID);
                 return res ? Ok() : BadRequest();
             }
             catch (Exception e)

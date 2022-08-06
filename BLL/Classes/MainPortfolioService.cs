@@ -17,29 +17,28 @@ namespace BLL
         {
             this._scopeFactory = scopeFactory;
         }
-        //public MainPortfolioService(IPortfolioRepository portfolioRepository)
-        //{
-        //    this._portfolioRepository = portfolioRepository;
-        //}
-        public Task<bool> AddPortfolio(Portfolio portfolio)
-        {
-            var isSuccess = false;
 
+        public async Task<bool> AddInstrumentToPortfolio(PortfolioInstrument portfolioInstrument, Guid userID)
+        {
             try
             {
+                bool isSuccess = false;
+                int portfolioID = portfolioInstrument.Portfolio.PortfolioID;
                 using var scope = _scopeFactory.CreateScope();
                 var portfolioRepo = scope.ServiceProvider.GetRequiredService<IPortfolioRepository>();
-                portfolioRepo.AddPortfolioAsync(portfolio);
-                isSuccess = true;
+                Portfolio portfolio = await portfolioRepo.GetUserPorfolioAsync(userID, portfolioID);
+                if (portfolio == null)
+                {
+                    throw new ArgumentOutOfRangeException($"Cannot find portfolio for userID:  {userID} and portfolioID {portfolioID}");
+                }
 
+                return await portfolioRepo.AddInstrumentToPortfolioAsync(portfolioInstrument, userID, portfolioID);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return Task.FromResult(isSuccess);
+                throw new Exception(ex.Message);
             }
-            return Task.FromResult(isSuccess);
-
         }
     }
 }

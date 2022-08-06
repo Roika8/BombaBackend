@@ -20,7 +20,7 @@ namespace DAL.Repositories
         }
         #region Private methoods
 
-        private async Task<bool> RegisterUser(User userData)
+        private async Task<Guid> RegisterUser(User userData)
         {
             try
             {
@@ -29,7 +29,8 @@ namespace DAL.Repositories
                 if (!foundUser)
                 {
                     await _dbContext.Users.AddAsync(userData);
-                    return _dbContext.SaveChanges() > 0;
+                    _dbContext.SaveChanges();
+                    return userData.UserID;
                 }
                 else throw new Exception("User already exists");
             }
@@ -83,7 +84,7 @@ namespace DAL.Repositories
                 throw new Exception(e.Message);
             }
         }
-        public Task<bool> RegisterUserAsync(User userData)
+        public Task<Guid> RegisterUserAsync(User userData)
         {
             try
             {
