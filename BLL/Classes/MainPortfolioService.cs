@@ -22,7 +22,6 @@ namespace BLL
         {
             try
             {
-                bool isSuccess = false;
                 int portfolioID = portfolioInstrument.Portfolio.PortfolioID;
                 using var scope = _scopeFactory.CreateScope();
                 var portfolioRepo = scope.ServiceProvider.GetRequiredService<IPortfolioRepository>();

@@ -127,3 +127,4 @@ C:\Users\97254\Source\Repos\BombaBackend\BombaRestAPI\obj\Debug\net5.0\refint\Bo
 C:\Users\97254\Source\Repos\BombaBackend\BombaRestAPI\obj\Debug\net5.0\BombaRestAPI.pdb
 C:\Users\97254\Source\Repos\BombaBackend\BombaRestAPI\obj\Debug\net5.0\BombaRestAPI.genruntimeconfig.cache
 C:\Users\97254\Source\Repos\BombaBackend\BombaRestAPI\obj\Debug\net5.0\ref\BombaRestAPI.dll
+C:\Users\97254\Source\Repos\BombaBackend\BombaRestAPI\obj\Debug\net5.0\BombaRestAPI.MvcApplicationPartsAssemblyInfo.cs
