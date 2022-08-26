@@ -23,7 +23,7 @@ namespace BombaAPI.Controllers
             _mainPortfolioService = mainPortfolio;
         }
 
-        [Route("AddPortfolio")]
+        [Route("AddInstrument")]
         [HttpPost]
         public async Task<IActionResult> AddInstrumentToPortfolio(PortfolioInstrument portfolioInstrument, Guid userID)
         {

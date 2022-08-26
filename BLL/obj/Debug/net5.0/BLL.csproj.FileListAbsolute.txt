@@ -49,3 +49,20 @@ C:\Users\97254\Source\Repos\BombaBackend\BLL\obj\Debug\net5.0\BLL.dll
 C:\Users\97254\Source\Repos\BombaBackend\BLL\obj\Debug\net5.0\refint\BLL.dll
 C:\Users\97254\Source\Repos\BombaBackend\BLL\obj\Debug\net5.0\BLL.pdb
 C:\Users\97254\source\repos\BombaBackend\BLL\obj\Debug\net5.0\ref\BLL.dll
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\bin\Debug\net5.0\BLL.deps.json
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\bin\Debug\net5.0\BLL.dll
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\bin\Debug\net5.0\BLL.pdb
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\bin\Debug\net5.0\DAL.dll
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\bin\Debug\net5.0\DATA.dll
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\bin\Debug\net5.0\DAL.pdb
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\bin\Debug\net5.0\DATA.pdb
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\obj\Debug\net5.0\BLL.csproj.AssemblyReference.cache
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\obj\Debug\net5.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\obj\Debug\net5.0\BLL.AssemblyInfoInputs.cache
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\obj\Debug\net5.0\BLL.AssemblyInfo.cs
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\obj\Debug\net5.0\BLL.csproj.CoreCompileInputs.cache
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\obj\Debug\net5.0\BLL.csproj.CopyComplete
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\obj\Debug\net5.0\BLL.dll
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\obj\Debug\net5.0\refint\BLL.dll
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\obj\Debug\net5.0\BLL.pdb
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BLL\obj\Debug\net5.0\ref\BLL.dll

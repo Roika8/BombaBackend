@@ -53,10 +53,7 @@ namespace DAL.Repositories
                 var instrumentPortfolioRepo = scope.ServiceProvider.GetRequiredService<IPortfolioInstrumentRepository>();
                 var portfolioRepo = scope.ServiceProvider.GetRequiredService<IPortfolioRepository>();
                 var portfolio = _dbContext.Portfolios.FirstOrDefault(p => p.UserID == userID && p.PortfolioID == portfolioID);
-                if (portfolio.Instruments == null)
-                {
-                    portfolio.Instruments=new List<PortfolioInstrument>();
-                }
+                portfolio.Instruments??=new List<PortfolioInstrument>();
                 portfolio.Instruments.Add(portfolioInstrument);
                 _dbContext.Portfolios.Update(portfolio);
                 return _dbContext.SaveChanges() > 0;
