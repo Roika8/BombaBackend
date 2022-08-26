@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\BLL",
+    "\\BLL\\Classes",
     "\\BombaRestAPI",
     "\\DAL",
     "\\DAL\\Repositories"
   ],
-  "SelectedNode": "\\DAL\\Repositories\\UserRepository.cs",
+  "SelectedNode": "\\BLL\\Classes\\UserService.cs",
   "PreviewInSolutionExplorer": false
 }
