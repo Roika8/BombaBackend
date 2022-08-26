@@ -44,11 +44,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj",
+      "projectUniqueName": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\DATA.csproj",
       "projectName": "DATA",
-      "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj",
+      "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\DATA.csproj",
       "packagesPath": "C:\\Users\\97254\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\obj\\",
+      "outputPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\97254\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+2JSRph0n2aK+a6hfG9k+cvk9rFxr0IgO7ZVpBpRJzDurpJaGf48zs+lpq7m93hKmwiBVVS+GcumZ2u8SEE4yg==",
+  "dgSpecHash": "p0AkfuvWWx8192RcnH7cjNvxHE8RolexjqaXaZnXfTLhJ4edNDT/adDEVB4sS4gOf7gYzFVL02WyvrXkoonkFw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj",
+  "projectFilePath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BLL\\BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\97254\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\97254\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

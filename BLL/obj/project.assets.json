@@ -5990,11 +5990,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj",
+      "projectUniqueName": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BLL\\BLL.csproj",
       "projectName": "BLL",
-      "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj",
+      "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BLL\\BLL.csproj",
       "packagesPath": "C:\\Users\\97254\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BLL\\obj\\",
+      "outputPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BLL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\97254\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6011,11 +6011,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj": {
-              "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj"
+            "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DAL\\DAL.csproj": {
+              "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DAL\\DAL.csproj"
             },
-            "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj": {
-              "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj"
+            "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\DATA.csproj": {
+              "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\DATA.csproj"
             }
           }
         }

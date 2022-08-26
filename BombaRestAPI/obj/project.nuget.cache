@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "auXRgBSE3Nv3B0VeDkMK5HM84kN+bCXnAF0RsUqiYOMwvWJ+HMTgsVuzsY5O5lCq/+xi6ivs5PKlnpU62HDH4w==",
+  "dgSpecHash": "+3UjpW13dJXAta/HLv17IhdPkgIX/xAR1tCgQ62nObz4wZxYGpitofM82kpPAmFxlD6IIUDNN5AJEKr3+y4EOg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BombaRestAPI\\BombaRestAPI.csproj",
+  "projectFilePath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BombaRestAPI\\BombaRestAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\97254\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\97254\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

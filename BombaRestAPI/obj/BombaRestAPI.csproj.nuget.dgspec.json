@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BombaRestAPI\\BombaRestAPI.csproj": {}
+    "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BombaRestAPI\\BombaRestAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj": {
+    "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BLL\\BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj",
+        "projectUniqueName": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BLL\\BLL.csproj",
         "projectName": "BLL",
-        "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj",
+        "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BLL\\BLL.csproj",
         "packagesPath": "C:\\Users\\97254\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BLL\\obj\\",
+        "outputPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BLL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\97254\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj": {
-                "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj"
+              "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DAL\\DAL.csproj"
               },
-              "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj": {
-                "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj"
+              "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\DATA.csproj": {
+                "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\DATA.csproj"
               }
             }
           }
@@ -72,14 +72,14 @@
         }
       }
     },
-    "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BombaRestAPI\\BombaRestAPI.csproj": {
+    "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BombaRestAPI\\BombaRestAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BombaRestAPI\\BombaRestAPI.csproj",
+        "projectUniqueName": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BombaRestAPI\\BombaRestAPI.csproj",
         "projectName": "BombaRestAPI",
-        "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BombaRestAPI\\BombaRestAPI.csproj",
+        "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BombaRestAPI\\BombaRestAPI.csproj",
         "packagesPath": "C:\\Users\\97254\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BombaRestAPI\\obj\\",
+        "outputPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BombaRestAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\97254\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -96,11 +96,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj": {
-                "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\BLL\\BLL.csproj"
+              "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BLL\\BLL.csproj": {
+                "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\BLL\\BLL.csproj"
               },
-              "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj": {
-                "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj"
+              "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DAL\\DAL.csproj"
               }
             }
           }
@@ -153,14 +153,14 @@
         }
       }
     },
-    "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj": {
+    "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj",
+        "projectUniqueName": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DAL\\DAL.csproj",
+        "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DAL\\DAL.csproj",
         "packagesPath": "C:\\Users\\97254\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DAL\\obj\\",
+        "outputPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\97254\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -177,8 +177,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj": {
-                "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj"
+              "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\DATA.csproj": {
+                "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\DATA.csproj"
               }
             }
           }
@@ -228,14 +228,14 @@
         }
       }
     },
-    "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj": {
+    "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\DATA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj",
+        "projectUniqueName": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\DATA.csproj",
         "projectName": "DATA",
-        "projectPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\DATA.csproj",
+        "projectPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\DATA.csproj",
         "packagesPath": "C:\\Users\\97254\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\97254\\Source\\Repos\\BombaBackend\\DATA\\obj\\",
+        "outputPath": "C:\\Users\\97254\\Desktop\\פיתוח תוכנה\\פרויקטים אישיים שלי\\Stocks project ASP CORE & React\\Backend\\DATA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\97254\\AppData\\Roaming\\NuGet\\NuGet.Config",
