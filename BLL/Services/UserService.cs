@@ -3,9 +3,6 @@ using DAL.Interfaces;
 using DATA;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -24,7 +21,8 @@ namespace BLL.Classes
         {
             Regex regex = new(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             Match match = regex.Match(userData.Email);
-            return match.Success && userData.Password.Length > 6;
+            return true;
+            //return match.Success && userData.Password.Length > 6;
         }
         #endregion
         #region Public methoods
@@ -50,7 +48,7 @@ namespace BLL.Classes
             {
                 using var scope = _scopeFactory.CreateScope();
                 var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
-                return await userRepository.CheckUserExistAsync(email, password);
+                return await userRepository.CheckUserDataExistAsync(email, password);
             }
             catch (Exception ex)
             {
@@ -63,15 +61,22 @@ namespace BLL.Classes
         {
             try
             {
-                using var scope = _scopeFactory.CreateScope();
-                var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
-                var portfolioRepository = scope.ServiceProvider.GetRequiredService<IPortfolioRepository>();
+                //userData.UserID = Guid.NewGuid();
+                IServiceScope scope = _scopeFactory.CreateScope();
+                using (scope)
+                {
+                    IUserRepository userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+                    bool userAlreadyExists = await userRepository.CheckEmailExistsAsync(userData.Email);
+                    if (userAlreadyExists) throw new Exception("User email already exists");
 
-                if (!ValidateUserData(userData)) throw new Exception("Email or password is not valid");
+                    IPortfolioRepository portfolioRepository = scope.ServiceProvider.GetRequiredService<IPortfolioRepository>();
 
-                Guid userID = await userRepository.RegisterUserAsync(userData);
-                int portfolioID = await portfolioRepository.CreatePortfolioAsync(userID);
-                return portfolioID != 0;
+                    if (!ValidateUserData(userData)) throw new Exception("Email or password is not valid");
+
+                    Guid userID = await userRepository.RegisterUserAsync(userData);
+                    int portfolioID = await portfolioRepository.CreatePortfolioAsync(userID);
+                    return portfolioID != 0;
+                }
             }
             catch (Exception ex)
             {

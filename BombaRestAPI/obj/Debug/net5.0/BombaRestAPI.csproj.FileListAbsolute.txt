@@ -137,6 +137,7 @@ C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים של�
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\BombaRestAPI.dll
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\BombaRestAPI.pdb
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Humanizer.dll
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -151,7 +152,6 @@ C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים של�
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -193,3 +193,4 @@ C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים של�
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\obj\Debug\net5.0\BombaRestAPI.pdb
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\obj\Debug\net5.0\BombaRestAPI.genruntimeconfig.cache
 C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\obj\Debug\net5.0\ref\BombaRestAPI.dll
+C:\Users\97254\Desktop\פיתוח תוכנה\פרויקטים אישיים שלי\Stocks project ASP CORE & React\Backend\BombaRestAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

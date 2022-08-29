@@ -1,6 +1,10 @@
 ﻿using BLL.Interfaces;
+using BLL.Services;
+using BombaRestAPI.DTO;
+using BombaRestAPI.DTOs;
 using DATA;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -16,20 +20,23 @@ namespace BombaRestAPI.Controllers
     {
         ILogger<UsersController> _logger;
         private readonly IUserService _userService;
-
-        public UsersController(ILogger<UsersController> logger, IUserService userService)
+        private readonly SignInManager<User> _signInManager;
+        private readonly TokenService _tokenService;
+        public UsersController(ILogger<UsersController> logger, IUserService userService, UserManager<User> userManager, SignInManager<User> signInManager, TokenService tokenService)
         {
             _logger = logger;
             _userService = userService;
+            _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
-        [Route("AddUser")]
+        [Route("RegisterUser")]
         [HttpPost]
-        public async Task<IActionResult> AddUser(User userData)
+        public async Task<IActionResult> RegisterUser(User userData)
         {
             try
             {
-                userData.UserID = Guid.NewGuid();
+                //Check is exist
                 bool res = await _userService.RegisterUser(userData);
                 return res ? Ok() : BadRequest();
             }
@@ -58,13 +65,28 @@ namespace BombaRestAPI.Controllers
         }
 
         [Route("Login")]
-        [HttpGet]
-        public async Task<IActionResult> Login(string email, string password)
+        [HttpPost]
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             try
             {
-                bool foundUser = await _userService.IsUserExist(email, password);
-                return foundUser ? Ok(foundUser) : BadRequest("Invalid user email or password");
+                User user = await _signInManager.UserManager.FindByEmailAsync(loginDto.Email);
+                if (user == null) return Unauthorized();
+
+                var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    return new UserDto
+                    {
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Token = _tokenService.CreateToken(user)
+                    };
+                }
+                return Unauthorized();
+
+                //bool foundUser = await _userService.IsUserExist(email, password);
+                //return foundUser ? Ok(foundUser) : BadRequest("Invalid user email or password");
             }
             catch (Exception e)
             {

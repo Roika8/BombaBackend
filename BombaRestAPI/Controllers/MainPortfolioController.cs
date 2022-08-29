@@ -38,5 +38,14 @@ namespace BombaAPI.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+
+        [Authorize]
+        [Route("GetPortfolio")]
+        [HttpGet]
+        public async Task<IActionResult> GetPortfolio()
+        {
+            return Ok($"This is portfolio for : ");
+        }
     }
 }

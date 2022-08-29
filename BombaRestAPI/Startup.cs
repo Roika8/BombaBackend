@@ -1,6 +1,7 @@
 using BLL;
 using BLL.Classes;
 using BLL.Interfaces;
+using BombaRestAPI.Extensions;
 using DAL;
 using DAL.Interfaces;
 using DAL.Repositories;
@@ -47,7 +48,30 @@ namespace BombaRestAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BombaAPI", Version = "v1" });
+                //c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                //{
+                //    In = ParameterLocation.Header,
+                //    Description = "Please enter a valid token",
+                //    Name = "Authorization",
+                //    Type = SecuritySchemeType.Http,
+                //    BearerFormat = "JWT",
+                //    Scheme = "Bearer"
+                //});
+                //c.AddSecurityRequirement(new OpenApiSecurityRequirement{
+                //{
+                //   new OpenApiSecurityScheme
+                // {
+                //     Reference = new OpenApiReference
+                //     {
+                //         Type=ReferenceType.SecurityScheme,
+                //         Id="Bearer"
+                //     }
+                // },
+                // new string[]{}
+                //      }
+                //     });
             });
+            services.AddIdentityService(_config);
 
         }
 
@@ -60,11 +84,18 @@ namespace BombaRestAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BombaRestAPI v1"));
+           
             }
 
             app.UseRouting();
 
+            app.UseCors("CorsPolicy");
+
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

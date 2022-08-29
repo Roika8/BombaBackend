@@ -30,7 +30,8 @@ namespace DAL.Repositories
                 {
                     await _dbContext.Users.AddAsync(userData);
                     _dbContext.SaveChanges();
-                    return userData.UserID;
+                    return new Guid();
+                    //return userData.UserID;
                 }
                 else throw new Exception("User already exists");
             }
@@ -44,12 +45,13 @@ namespace DAL.Repositories
         {
             try
             {
-                User user = _dbContext.Users.Where(user => user.UserID == userID).ToListAsync().Result.FirstOrDefault();
-                if (user == null)
-                {
-                    throw new ArgumentOutOfRangeException("User id could not be found");
-                }
-                else return user;
+                return null;
+                //User user = _dbContext.Users.Where(user => user.UserID == userID).ToListAsync().Result.FirstOrDefault();
+                //if (user == null)
+                //{
+                //    throw new ArgumentOutOfRangeException("User id could not be found");
+                //}
+                //else return user;
             }
             catch (Exception ex)
             {
@@ -61,10 +63,11 @@ namespace DAL.Repositories
         {
             try
             {
-                User foundUser = _dbContext.Users.Where(user => user.Email == email && user.Password == password)
-                                  .ToList().FirstOrDefault();
+                return false;
+                //User foundUser = _dbContext.Users.Where(user => user.Email == email && user.Password == password)
+                //                  .ToList().FirstOrDefault();
 
-                return foundUser != null;
+                //return foundUser != null;
             }
             catch (Exception ex)
             {
@@ -96,15 +99,28 @@ namespace DAL.Repositories
                 throw new Exception(e.Message);
             }
         }
-        public Task<bool> CheckUserExistAsync(string email, string password)
+        public Task<bool> CheckUserDataExistAsync(string email, string password)
+        {
+            return null;
+            //try
+            //{
+            //    return Task.Run(() => CheckUserExist(email, password));
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception(ex.Message);
+            //}
+        }
+        public async Task<bool> CheckEmailExistsAsync(string email)
         {
             try
             {
-                return Task.Run(() => CheckUserExist(email, password));
+                var res = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+                return res != null;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(e.Message);
             }
         }
     }

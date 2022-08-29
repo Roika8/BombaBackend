@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\BLL",
-    "\\BLL\\Classes",
-    "\\BombaRestAPI",
-    "\\DAL",
-    "\\DAL\\Repositories"
+    ""
   ],
+  "SelectedNode": "\\BombaRestAPI.sln",
   "PreviewInSolutionExplorer": false
 }
