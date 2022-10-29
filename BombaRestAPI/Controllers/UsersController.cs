@@ -14,11 +14,12 @@ using System.Threading.Tasks;
 
 namespace BombaRestAPI.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        ILogger<UsersController> _logger;
+        readonly ILogger<UsersController> _logger;
         private readonly IUserService _userService;
         private readonly SignInManager<User> _signInManager;
         private readonly TokenService _tokenService;

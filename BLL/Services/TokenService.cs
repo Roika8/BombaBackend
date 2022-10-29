@@ -1,4 +1,5 @@
 ﻿using DATA;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,12 @@ namespace BLL.Services
 {
     public class TokenService
     {
+        private IConfiguration _config;
+
+        public TokenService(IConfiguration config)
+        {
+            _config = config;
+        }
         public string CreateToken(User user)
         {
             var claims = new List<Claim>
@@ -18,7 +25,7 @@ namespace BLL.Services
                 new Claim(ClaimTypes.NameIdentifier,user.Id),
                 new Claim(ClaimTypes.Email,user.Email),
             };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Super very secret key"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["TokenKey"]));
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor

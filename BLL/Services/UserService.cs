@@ -14,8 +14,7 @@ namespace BLL.Classes
     {
 
         private readonly IServiceScopeFactory _scopeFactory;
-        private readonly UserManager<User> _userManager;
-        public UserService(IServiceScopeFactory scopeFactory,Logger<String> _logger)
+        public UserService(IServiceScopeFactory scopeFactory)
         {
             _scopeFactory = scopeFactory;
         }
@@ -78,7 +77,7 @@ namespace BLL.Classes
                     if (!ValidateEmailFormat(userData.Email))
                         throw new Exception("Email or password is not valid");
                     //TODO Check the password string validation 
-                   var result= await userManager.CreateAsync(userData, userData.PasswordHash);
+                    var result = await userManager.CreateAsync(userData, userData.PasswordHash);
                     if (result.Succeeded)
                     {
 
@@ -87,8 +86,8 @@ namespace BLL.Classes
                     {
 
                     }
-                    var registeredUser=userManager.()
-                    int portfolioID = await portfolioRepository.CreatePortfolioAsync(userID);
+                    //TODO Change it 
+                    int portfolioID = await portfolioRepository.CreatePortfolioAsync(new Guid());
                     return portfolioID != 0;
                 }
             }

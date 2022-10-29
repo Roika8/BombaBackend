@@ -40,12 +40,11 @@ namespace BombaAPI.Controllers
         }
 
 
-        [Authorize]
         [Route("GetPortfolio")]
         [HttpGet]
         public async Task<IActionResult> GetPortfolio()
         {
-            return Ok($"This is portfolio for : ");
+             return Ok($"This is portfolio for : ");
         }
     }
 }

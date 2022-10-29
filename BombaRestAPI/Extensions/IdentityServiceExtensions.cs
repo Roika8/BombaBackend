@@ -22,7 +22,7 @@ namespace BombaRestAPI.Extensions
                 .AddEntityFrameworkStores<DataContext>()
                 .AddSignInManager<SignInManager<User>>();
 
-            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Super very secret key"));
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {
                 opt.TokenValidationParameters = new TokenValidationParameters
