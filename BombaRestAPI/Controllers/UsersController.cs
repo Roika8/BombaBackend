@@ -36,7 +36,7 @@ namespace BombaRestAPI.Controllers
         {
             try
             {
-                //Check is exist
+                //TODO Check is exist
                 bool res = await _userService.RegisterUser(userData);
                 return res ? Ok() : BadRequest();
             }
