@@ -2,6 +2,7 @@
 using DAL.Interfaces;
 using DATA;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -24,7 +25,6 @@ namespace BLL.Classes
             Regex regex = new(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             Match match = regex.Match(email);
             return match.Success;
-            //return match.Success && userData.Password.Length > 6;
         }
         #endregion
         #region Public methoods
@@ -68,14 +68,14 @@ namespace BLL.Classes
                 using (scope)
                 {
                     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-                    var existUser = await userManager.GetEmailAsync(userData);
-
-                    if (existUser != null) throw new Exception("User email already exists");
-
+                    if (await userManager.Users.AnyAsync(user => user.Email == userData.Email))
+                    {
+                        throw new Exception("User email already exists");
+                    }
                     IPortfolioRepository portfolioRepository = scope.ServiceProvider.GetRequiredService<IPortfolioRepository>();
 
                     if (!ValidateEmailFormat(userData.Email))
-                        throw new Exception("Email or password is not valid");
+                        throw new Exception("Email is not valid");
                     //TODO Check the password string validation 
                     var result = await userManager.CreateAsync(userData, userData.PasswordHash);
                     if (result.Succeeded)
