@@ -1,10 +1,12 @@
 using BLL;
 using BLL.Classes;
 using BLL.Interfaces;
+using BLL.PortfolioInstruments;
 using BombaRestAPI.Extensions;
 using DAL;
 using DAL.Interfaces;
 using DAL.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -48,7 +50,7 @@ namespace BombaRestAPI
             services.AddControllers(opt =>
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                opt.Filters.Add(new AuthorizeFilter(policy));   
+                opt.Filters.Add(new AuthorizeFilter(policy));
             });
             services.AddSwaggerGen(c =>
             {
@@ -78,6 +80,7 @@ namespace BombaRestAPI
             });
             services.AddIdentityService(_config);
 
+            services.AddMediatR(typeof(List.Handler).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

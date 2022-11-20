@@ -1,36 +1,33 @@
-﻿using BLL.Interfaces;
+﻿using BLL.PortfolioInstruments;
+using BombaRestAPI.Controllers;
 using DATA;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BombaAPI.Controllers
 {
+    [AllowAnonymous] //Change it after
     [ApiController]
     [Route("api/[controller]")]
-    public class MainPortfolioController : ControllerBase
+    public class MainPortfolioController : BaseApiController
     {
         private readonly ILogger<MainPortfolioController> _logger;
-        private readonly IMainPortfolioService _mainPortfolioService;
 
-        public MainPortfolioController(ILogger<MainPortfolioController> logger, IMainPortfolioService mainPortfolio)
-        {
-            _logger = logger;
-            _mainPortfolioService = mainPortfolio;
-        }
+
 
         [Route("AddInstrument")]
         [HttpPost]
-        public async Task<IActionResult> AddInstrumentToPortfolio(PortfolioInstrument portfolioInstrument, Guid userID)
+        public async Task<ActionResult<PortfolioInstrument>> AddInstrumentToPortfolio([FromBody] PortfolioInstrument portfolioInstrument)
         {
             try
             {
-                bool res = await _mainPortfolioService.AddInstrumentToPortfolio(portfolioInstrument, userID);
-                return res ? Ok() : BadRequest();
+                return Ok();
+
+
             }
             catch (Exception e)
             {
@@ -39,13 +36,17 @@ namespace BombaAPI.Controllers
             }
         }
 
-        
-        //[Route("GetPortfolio")]
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetPortfolio(Guid id)
-        //{
-        //    //Todo get portfoloo of the auth user
-        //     return Ok($"This is portfolio for : ");
-        //}
+        [HttpGet("GetSingleInstrument/{id}")]
+        public async Task<ActionResult<PortfolioInstrument>> GetPortfolio(int id)
+        {
+            return await Mediator.Send(new InstrumentDetails.Query { InstrumentID = id });
+        }
+
+        [HttpGet("GetAllPortfolioInstruments")]
+        public async Task<ActionResult<List<PortfolioInstrument>>> GetAllPortfolioInstruments()
+        {
+            return await Mediator.Send(new List.Query());
+        }
+
     }
 }
