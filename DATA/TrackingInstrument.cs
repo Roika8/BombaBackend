@@ -9,9 +9,9 @@ namespace DATA
         public int InstrumentID { get; set; }
 
         [ForeignKey("PortfolioID")]
-        public TrackingPortfolio Portfolio { get; set; }
+        public virtual TrackingPortfolio Portfolio { get; set; }
 
         public string Symbol { get; set; }
-        public ICollection<TrackingInstumentPrice> TrackingPrices { get; set; }
+        public virtual ICollection<TrackingInstumentPrice> TrackingPrices { get; set; }
     }
 }

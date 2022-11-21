@@ -10,10 +10,10 @@ namespace DAL.Repositories
 {
     public class PortfolioRepository : IPortfolioRepository
     {
-        private readonly DataContext _dbContext;
+        private readonly MainDataContext _dbContext;
         private readonly IServiceScopeFactory _scopeFactory;
 
-        public PortfolioRepository(DataContext dbContext, IServiceScopeFactory scopeFactory)
+        public PortfolioRepository(MainDataContext dbContext, IServiceScopeFactory scopeFactory)
         {
             this._dbContext = dbContext;
             _scopeFactory = scopeFactory;

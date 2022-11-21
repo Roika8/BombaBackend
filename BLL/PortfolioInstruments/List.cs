@@ -20,9 +20,9 @@ namespace BLL.PortfolioInstruments
 
         public class Handler : IRequestHandler<Query, List<PortfolioInstrument>>
         {
-            private readonly DataContext _context;
+            private readonly MainDataContext _context;
 
-            public Handler(DataContext context)
+            public Handler(MainDataContext context)
             {
                 _context = context;
             }

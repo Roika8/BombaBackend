@@ -24,7 +24,7 @@ namespace BombaRestAPI.Extensions
 
 
             })
-                .AddEntityFrameworkStores<DataContext>()
+                .AddEntityFrameworkStores<UserDataContext>()
                 .AddSignInManager<SignInManager<User>>();
 
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));

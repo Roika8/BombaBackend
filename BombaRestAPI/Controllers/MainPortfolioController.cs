@@ -1,4 +1,5 @@
-﻿using BLL.PortfolioInstruments;
+﻿using BLL.MainPortfolio;
+using BLL.PortfolioInstruments;
 using BombaRestAPI.Controllers;
 using DATA;
 using Microsoft.AspNetCore.Authorization;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace BombaAPI.Controllers
@@ -18,26 +20,21 @@ namespace BombaAPI.Controllers
         private readonly ILogger<MainPortfolioController> _logger;
 
 
-
-        [Route("AddInstrument")]
-        [HttpPost]
-        public async Task<ActionResult<PortfolioInstrument>> AddInstrumentToPortfolio([FromBody] PortfolioInstrument portfolioInstrument)
+        [HttpGet("GetPortfolio/{id}")]
+        public async Task<ActionResult<Portfolio>> GetPortfolio(int id)
         {
-            try
-            {
-                return Ok();
-
-
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e.Message);
-                return BadRequest(e.Message);
-            }
+            return await Mediator.Send(new MainPortfolioDetails.Query { PortfolioID = id });
+        }
+        [Route("AddPortfolio")]
+        [HttpPost]
+        public async Task<IActionResult> AddNewPortfolio()
+        {
+            return Ok(await Mediator.Send(new CreatePortfolio.Command()));
         }
 
+
         [HttpGet("GetSingleInstrument/{id}")]
-        public async Task<ActionResult<PortfolioInstrument>> GetPortfolio(int id)
+        public async Task<ActionResult<PortfolioInstrument>> GetPortfolioInstrument(int id)
         {
             return await Mediator.Send(new InstrumentDetails.Query { InstrumentID = id });
         }
@@ -46,6 +43,14 @@ namespace BombaAPI.Controllers
         public async Task<ActionResult<List<PortfolioInstrument>>> GetAllPortfolioInstruments()
         {
             return await Mediator.Send(new List.Query());
+        }
+
+
+        [Route("AddInstrument")]
+        [HttpPost]
+        public async Task<IActionResult> AddPortfolioInstrument(PortfolioInstrument portfolioInstrument)
+        {
+            return Ok(await Mediator.Send(new Create.Command { Instrument = portfolioInstrument }));
         }
 
     }

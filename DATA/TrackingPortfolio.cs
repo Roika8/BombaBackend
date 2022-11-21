@@ -10,8 +10,8 @@ namespace DATA
         public int PortfolioID { get; set; }
 
         [ForeignKey("UserID")]
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
-        public ICollection<TrackingInstrument> Instruments { get; set; }
+        public virtual ICollection<TrackingInstrument> Instruments { get; set; }
     }
 }

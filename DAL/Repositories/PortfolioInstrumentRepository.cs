@@ -10,8 +10,8 @@ namespace DAL.Repositories
 {
     public class PortfolioInstrumentRepository : IPortfolioInstrumentRepository
     {
-        private DataContext dbContext;
-        public PortfolioInstrumentRepository(DataContext _dbContext)
+        private MainDataContext dbContext;
+        public PortfolioInstrumentRepository(MainDataContext _dbContext)
         {
             this.dbContext = _dbContext;
         }

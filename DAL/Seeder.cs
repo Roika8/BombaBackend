@@ -11,7 +11,7 @@ namespace DAL
 {
     public class Seeder
     {
-        public static async Task SeedUsers(DataContext context, UserManager<User> userManager)
+        public static async Task SeedUsers(UserDataContext context, UserManager<User> userManager)
         {
             if (!userManager.Users.Any())
             {

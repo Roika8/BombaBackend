@@ -13,7 +13,7 @@ namespace DATA
         [ForeignKey("UserID")]
         public Guid UserID { get; set; }
 
-        public ICollection<PortfolioInstrument> Instruments { get; set; }
+        public virtual ICollection<PortfolioInstrument> Instruments { get; set; }
     }
 }
 

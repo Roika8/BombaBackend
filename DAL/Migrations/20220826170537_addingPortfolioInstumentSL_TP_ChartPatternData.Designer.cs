@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(MainDataContext))]
     [Migration("20220826170537_addingPortfolioInstumentSL_TP_ChartPatternData")]
     partial class addingPortfolioInstumentSL_TP_ChartPatternData
     {

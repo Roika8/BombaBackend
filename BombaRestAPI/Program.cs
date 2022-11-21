@@ -23,7 +23,7 @@ namespace BombaRestAPI
             var services = scope.ServiceProvider;
             try
             {
-                var context = services.GetRequiredService<DataContext>();
+                var context = services.GetRequiredService<UserDataContext>();
                 var userManager = services.GetRequiredService<UserManager<User>>();
                 await context.Database.MigrateAsync();
                 await Seeder.SeedUsers(context, userManager);

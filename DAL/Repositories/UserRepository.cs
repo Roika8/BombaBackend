@@ -12,9 +12,9 @@ namespace DAL.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly DataContext _dbContext;
+        private readonly UserDataContext _dbContext;
 
-        public UserRepository(DataContext dbContext)
+        public UserRepository(UserDataContext dbContext)
         {
             this._dbContext = dbContext;
         }

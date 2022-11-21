@@ -9,7 +9,7 @@ namespace DATA
         public int InstrumentID { get;  set; }
 
         [ForeignKey("PortfolioID")]
-        public HistoryPortfolio Portfolio { get;  set; }
+        public virtual HistoryPortfolio Portfolio { get;  set; }
 
         public string Symbol { get;  set; }
         public decimal MarketValue { get;  set; }

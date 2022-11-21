@@ -3,16 +3,28 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Reflection.Emit;
 
 namespace DAL
 {
-    public class DataContext : IdentityDbContext<User>
+    public class MainDataContext : DbContext
     {
-        public DataContext([NotNull] DbContextOptions options) : base(options)
+        public MainDataContext([NotNull] DbContextOptions<MainDataContext> options) : base(options)
         {
+           
         }
+      
+   
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Portfolio>()
+                   .HasMany(c => c.Instruments)
+                   .WithOne(e => e.Portfolio);
 
+            base.OnModelCreating(builder);
 
+        }
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<PortfolioInstrument> PortfolioInstruments { get; set; }
 

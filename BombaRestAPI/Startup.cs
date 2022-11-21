@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace BombaRestAPI
@@ -42,11 +43,14 @@ namespace BombaRestAPI
             services.AddSingleton<IMainPortfolioService, MainPortfolioService>();
             services.AddSingleton<IUserService, UserService>();
 
-            services.AddDbContext<DataContext>(ops =>
+            services.AddDbContext<MainDataContext>(ops =>
+            {
+                ops.UseLazyLoadingProxies().UseSqlServer(_config.GetConnectionString("DefaultConnection"));
+            });
+            services.AddDbContext<UserDataContext>(ops =>
             {
                 ops.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
             });
-
             services.AddControllers(opt =>
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();

@@ -11,8 +11,8 @@ namespace DATA
         public int PortfolioID { get;  set; }
 
         [ForeignKey("UserID")]
-        public User User { get;  set; }
+        public virtual User User { get;  set; }
 
-        public ICollection<HistoryInstument> Instruments { get;  set; }
+        public virtual ICollection<HistoryInstument> Instruments { get;  set; }
     }
 }
