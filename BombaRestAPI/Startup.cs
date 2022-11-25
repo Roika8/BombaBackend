@@ -1,5 +1,6 @@
 using BLL;
 using BLL.Classes;
+using BLL.Core;
 using BLL.Interfaces;
 using BLL.PortfolioInstruments;
 using BombaRestAPI.Extensions;
@@ -34,57 +35,17 @@ namespace BombaRestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddScoped<IPortfolioInstrumentRepository, PortfolioInstrumentRepository>();
-            services.AddScoped<IPortfolioRepository, PortfolioRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-
-
-            services.AddSingleton<IMainPortfolioService, MainPortfolioService>();
-            services.AddSingleton<IUserService, UserService>();
-
-            services.AddDbContext<MainDataContext>(ops =>
-            {
-                ops.UseLazyLoadingProxies().UseSqlServer(_config.GetConnectionString("DefaultConnection"));
-            });
-            services.AddDbContext<UserDataContext>(ops =>
-            {
-                ops.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
-            });
             services.AddControllers(opt =>
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
-            });
-            services.AddSwaggerGen(c =>
+            }).AddNewtonsoftJson(ops =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BombaAPI", Version = "v1" });
-                //c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                //{
-                //    In = ParameterLocation.Header,
-                //    Description = "Please enter a valid token",
-                //    Name = "Authorization",
-                //    Type = SecuritySchemeType.Http,
-                //    BearerFormat = "JWT",
-                //    Scheme = "Bearer"
-                //});
-                //c.AddSecurityRequirement(new OpenApiSecurityRequirement{
-                //{
-                //   new OpenApiSecurityScheme
-                // {
-                //     Reference = new OpenApiReference
-                //     {
-                //         Type=ReferenceType.SecurityScheme,
-                //         Id="Bearer"
-                //     }
-                // },
-                // new string[]{}
-                //      }
-                //     });
+                ops.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-            services.AddIdentityService(_config);
 
-            services.AddMediatR(typeof(List.Handler).Assembly);
+            services.AddIdentityService(_config);
+            services.AddApplicationServices(_config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,7 +1,7 @@
-﻿using DAL;
+﻿using AutoMapper;
+using DAL;
 using DATA;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,24 +11,29 @@ using System.Threading.Tasks;
 
 namespace BLL.PortfolioInstruments
 {
-    public class Create
+    public class EditInstrument
     {
         public class Command : IRequest
         {
-            public PortfolioInstrument Instrument { get; set; }
+            public PortfolioInstrument PortfolioInstrument { get; set; }
         }
+
         public class Handler : IRequestHandler<Command>
         {
             private readonly MainDataContext _context;
+            private readonly IMapper _mapper;
 
-            public Handler(MainDataContext context)
+            public Handler(MainDataContext dataContext, IMapper mapper)
             {
-                _context = context;
+                _context = dataContext;
+                _mapper = mapper;
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var portfolio = await _context.Portfolios.FindAsync(request.Instrument.Portfolio.PortfolioID);
-                portfolio.Instruments.Add(request.Instrument);
+                PortfolioInstrument instrument = await _context.PortfolioInstruments.FindAsync(request.PortfolioInstrument.InstrumentID);
+
+                _mapper.Map(request.PortfolioInstrument, instrument);
+
                 await _context.SaveChangesAsync();
                 return Unit.Value;
             }

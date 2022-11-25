@@ -1,13 +1,16 @@
 ﻿using BLL.MainPortfolio;
 using BLL.PortfolioInstruments;
 using BombaRestAPI.Controllers;
+using BombaRestAPI.Properties.DTOs;
 using DATA;
+using DATA.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BombaAPI.Controllers
@@ -17,41 +20,74 @@ namespace BombaAPI.Controllers
     [Route("api/[controller]")]
     public class MainPortfolioController : BaseApiController
     {
-        private readonly ILogger<MainPortfolioController> _logger;
 
+        #region Portfolio
 
         [HttpGet("GetPortfolio/{id}")]
-        public async Task<ActionResult<Portfolio>> GetPortfolio(int id)
+        public async Task<ActionResult<Portfolio>> GetPortfolio(int id, CancellationToken cancellationToken)
         {
-            return await Mediator.Send(new MainPortfolioDetails.Query { PortfolioID = id });
+            return await Mediator.Send(new MainPortfolioDetails.Query { PortfolioID = id }, cancellationToken);
         }
+
         [Route("AddPortfolio")]
         [HttpPost]
         public async Task<IActionResult> AddNewPortfolio()
         {
             return Ok(await Mediator.Send(new CreatePortfolio.Command()));
         }
+        //Edit portfolio . delete instruemnt
+        //Edit instrument. edit data
+        #endregion
+        #region Instruments in portfolio
 
-
-        [HttpGet("GetSingleInstrument/{id}")]
-        public async Task<ActionResult<PortfolioInstrument>> GetPortfolioInstrument(int id)
+        [HttpDelete("DeleteInstrument/{instrumentID}")]
+        public async Task<ActionResult<PortfolioInstrument>> DeletePortfolioInstrument(int instrumentID)
         {
-            return await Mediator.Send(new InstrumentDetails.Query { InstrumentID = id });
+            return Ok(await Mediator.Send(new DeleteInstrument.Command { InstrumentID = instrumentID }));
+        }
+        [HttpPut("EditPortfolioInstrument/{instrumentID}")]
+        public async Task<ActionResult<PortfolioInstrument>> EditPortfolioInstrument(int instrumentID, PortfolioInstrumentDto portfolioInstrumentDto)
+        {
+            PortfolioInstrument portfolioInstrument = new()
+            {
+                AvgPrice = portfolioInstrumentDto.AvgPrice,
+                ChartPattern = (ChartPattern)portfolioInstrumentDto.ChartPattern,
+                StopLoss = portfolioInstrumentDto.StopLoss,
+                Symbol = portfolioInstrumentDto.Symbol,
+                TakeProfit = portfolioInstrumentDto.TakeProfit,
+                Units = portfolioInstrumentDto.Units,
+                InstrumentID = instrumentID
+            };
+            return Ok(await Mediator.Send(new EditInstrument.Command { PortfolioInstrument = portfolioInstrument }));
         }
 
-        [HttpGet("GetAllPortfolioInstruments")]
-        public async Task<ActionResult<List<PortfolioInstrument>>> GetAllPortfolioInstruments()
+
+
+        [HttpGet("GetSingleInstrument/{instrumentID}")]
+        public async Task<ActionResult<PortfolioInstrument>> GetSinglePortfolioInstrument(int instrumentID)
         {
-            return await Mediator.Send(new List.Query());
+            return await Mediator.Send(new InstrumentDetails.Query { InstrumentID = instrumentID });
         }
 
-
-        [Route("AddInstrument")]
+        [Route("AddInstrumentToPortfolio")]
         [HttpPost]
-        public async Task<IActionResult> AddPortfolioInstrument(PortfolioInstrument portfolioInstrument)
+        public async Task<IActionResult> AddPortfolioInstrument(PortfolioInstrumentDto portfolioInstrumentDto)
         {
+            PortfolioInstrument portfolioInstrument = new()
+            {
+                AvgPrice = portfolioInstrumentDto.AvgPrice,
+                ChartPattern = (ChartPattern)portfolioInstrumentDto.ChartPattern,
+                StopLoss = portfolioInstrumentDto.StopLoss,
+                Symbol = portfolioInstrumentDto.Symbol,
+                TakeProfit = portfolioInstrumentDto.TakeProfit,
+                Units = portfolioInstrumentDto.Units,
+            };
+            portfolioInstrument.Portfolio.PortfolioID = portfolioInstrumentDto.PortfolioID;
+
+
             return Ok(await Mediator.Send(new Create.Command { Instrument = portfolioInstrument }));
         }
+        #endregion
 
     }
 }

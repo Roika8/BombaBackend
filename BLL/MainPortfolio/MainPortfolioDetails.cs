@@ -1,10 +1,6 @@
 ﻿using DAL;
 using DATA;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,9 +20,11 @@ namespace BLL.MainPortfolio
             {
                 _context = context;
             }
+
             public async Task<Portfolio> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Portfolios.FindAsync(request.PortfolioID);
+                var x = await _context.Portfolios.FindAsync(new object[] { request.PortfolioID }, cancellationToken);
+                return x;
             }
         }
     }
