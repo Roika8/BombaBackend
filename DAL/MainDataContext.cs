@@ -5,6 +5,8 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Reflection.Emit;
+using DATA.Portfolios;
+using DATA.Instruments;
 
 namespace DAL
 {

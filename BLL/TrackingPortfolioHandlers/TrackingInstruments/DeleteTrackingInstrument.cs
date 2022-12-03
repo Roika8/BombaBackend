@@ -1,11 +1,15 @@
 ﻿using DAL;
 using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BLL.PortfolioInstruments
+namespace BLL.TrackingPortfolioHandlers.TrackingInstruments
 {
-    public class DeleteInstrument
+    public class DeleteTrackingInstrument
     {
         public class Command : IRequest
         {
@@ -21,9 +25,9 @@ namespace BLL.PortfolioInstruments
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var portfolioInstrument = await _context.PortfolioInstruments.FindAsync(request.InstrumentID);
-                _context.Remove(portfolioInstrument);
-                await _context.SaveChangesAsync();
+                var trackingInstrument = await _context.TrackingInstruments.FindAsync(new object[] { request.InstrumentID }, cancellationToken: cancellationToken);
+                _context.Remove(trackingInstrument);
+                await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
         }

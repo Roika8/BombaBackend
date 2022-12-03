@@ -1,7 +1,7 @@
 ﻿using DAL;
-using DATA;
+using DATA.Instruments;
+using DATA.Portfolios;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +9,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BLL.PortfolioInstruments
+namespace BLL.TrackingPortfolioHandlers.Portfolios
 {
-    public class Create
+    public class CreateTrackingPortfolio
     {
         public class Command : IRequest
         {
-            public PortfolioInstrument Instrument { get; set; }
+
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -27,9 +27,13 @@ namespace BLL.PortfolioInstruments
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var portfolio = await _context.Portfolios.FindAsync(request.Instrument.Portfolio.PortfolioID);
-                portfolio.Instruments.Add(request.Instrument);
-                await _context.SaveChangesAsync();
+                TrackingPortfolio portfolio = new()
+                {
+                    Instruments = new List<TrackingInstrument>(),
+                    UserID = Guid.NewGuid()
+                };
+                _context.TrackingPortfolios.Add(portfolio);
+                await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
         }

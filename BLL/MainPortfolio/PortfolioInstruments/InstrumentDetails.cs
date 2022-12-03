@@ -1,5 +1,5 @@
 ﻿using DAL;
-using DATA;
+using DATA.Instruments;
 using MediatR;
 using System;
 using System.Collections.Generic;

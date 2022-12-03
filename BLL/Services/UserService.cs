@@ -29,6 +29,7 @@ namespace BLL.Classes
             return match.Success;
         }
         #endregion
+     
         #region Public methoods
 
         public async Task<User> GetUser(Guid userID)

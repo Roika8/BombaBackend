@@ -1,5 +1,6 @@
 ﻿using DAL.Interfaces;
-using DATA;
+using DATA.Instruments;
+using DATA.Portfolios;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

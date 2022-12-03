@@ -11,6 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using BLL.PortfolioInstruments;
+using BLL.MainPortfolio;
+using DATA;
+using System;
+using System.Collections.Generic;
+using static BLL.MainPortfolio.GenericPortfolioDetailsGetter;
 
 namespace BombaRestAPI.Extensions
 {
@@ -23,7 +28,7 @@ namespace BombaRestAPI.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
 
 
-            services.AddSingleton<IMainPortfolioService, MainPortfolioService>();
+            services.AddSingleton<IGenericPortfolioService, GenericPortfolioService>();
             services.AddSingleton<IUserService, UserService>();
 
             services.AddDbContext<MainDataContext>(ops =>
@@ -40,7 +45,8 @@ namespace BombaRestAPI.Extensions
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BombaAPI", Version = "v1" });
             });
 
-            services.AddMediatR(typeof(List.Handler).Assembly);
+            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+          
             services.AddAutoMapper(typeof(Mapping).Assembly);
 
 

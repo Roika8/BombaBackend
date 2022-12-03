@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace DATA
+namespace DATA.Portfolios
 {
-    public class Portfolio
+    public abstract class BasePortfolio<T>
     {
         [Key]
         public int PortfolioID { get; set; }
@@ -13,7 +13,7 @@ namespace DATA
         [ForeignKey("UserID")]
         public Guid UserID { get; set; }
 
-        public virtual ICollection<PortfolioInstrument> Instruments { get; set; }
+        public virtual ICollection<T> Instruments { get; set; }
+
     }
 }
-

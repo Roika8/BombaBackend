@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DAL;
-using DATA;
+using DATA.Instruments;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace BLL.PortfolioInstruments
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                PortfolioInstrument instrument = await _context.PortfolioInstruments.FindAsync(request.PortfolioInstrument.InstrumentID);
+                PortfolioInstrument instrument = await _context.PortfolioInstruments.FindAsync(new object[] { request.PortfolioInstrument.InstrumentID }, cancellationToken);
 
                 _mapper.Map(request.PortfolioInstrument, instrument);
 

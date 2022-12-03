@@ -2,8 +2,9 @@
 using BLL.PortfolioInstruments;
 using BombaRestAPI.Controllers;
 using BombaRestAPI.Properties.DTOs;
-using DATA;
 using DATA.Enums;
+using DATA.Instruments;
+using DATA.Portfolios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -26,7 +27,7 @@ namespace BombaAPI.Controllers
         [HttpGet("GetPortfolio/{id}")]
         public async Task<ActionResult<Portfolio>> GetPortfolio(int id, CancellationToken cancellationToken)
         {
-            return await Mediator.Send(new MainPortfolioDetails.Query { PortfolioID = id }, cancellationToken);
+            return await Mediator.Send(new GenericPortfolioDetailsGetter.Query<Portfolio> { PortfolioID = id }, cancellationToken);
         }
 
         [Route("AddPortfolio")]
@@ -35,9 +36,13 @@ namespace BombaAPI.Controllers
         {
             return Ok(await Mediator.Send(new CreatePortfolio.Command()));
         }
+
         //Edit portfolio . delete instruemnt
         //Edit instrument. edit data
         #endregion
+
+
+
         #region Instruments in portfolio
 
         [HttpDelete("DeleteInstrument/{instrumentID}")]
@@ -85,7 +90,7 @@ namespace BombaAPI.Controllers
             portfolioInstrument.Portfolio.PortfolioID = portfolioInstrumentDto.PortfolioID;
 
 
-            return Ok(await Mediator.Send(new Create.Command { Instrument = portfolioInstrument }));
+            return Ok(await Mediator.Send(new CreateInstrument.Command { Instrument = portfolioInstrument }));
         }
         #endregion
 

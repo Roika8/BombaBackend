@@ -1,19 +1,13 @@
 ﻿using DATA.Enums;
+using DATA.Portfolios;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DATA
+namespace DATA.Instruments
 {
-    public class PortfolioInstrument
+    public class PortfolioInstrument : BaseInstrument<Portfolio>
     {
-        [Key]
-        public int InstrumentID { get; set; }
-
-        [ForeignKey("PortfolioID")]
-        public virtual Portfolio Portfolio { get; set; }
-
-        public string Symbol { get; set; }
         public decimal AvgPrice { get; set; }
         public decimal Units { get; set; }
         public decimal? StopLoss { get; set; }
