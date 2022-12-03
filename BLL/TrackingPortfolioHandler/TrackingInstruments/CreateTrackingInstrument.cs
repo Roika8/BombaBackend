@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BLL.TrackingPortfolioHandlers.TrackingInstruments
+namespace BLL.TrackingPortfolioHandler.TrackingInstruments
 {
     public class CreateTrackingInstrument
     {

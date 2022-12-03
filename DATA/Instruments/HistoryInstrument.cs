@@ -4,7 +4,7 @@ using DATA.Portfolios;
 
 namespace DATA.Instruments
 {
-    public class HistoryInstument : BaseInstrument<HistoryPortfolio>
+    public class HistoryInstrument : BaseInstrument<HistoryPortfolio>
     {
         public decimal MarketValue { get; set; }
         public decimal Units { get; set; }

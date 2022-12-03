@@ -1,5 +1,4 @@
-﻿using BLL.Interfaces;
-using BLL.Services;
+﻿using BLL.Services;
 using BombaRestAPI.DTO;
 using BombaRestAPI.DTOs;
 using DATA;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -23,15 +21,13 @@ namespace BombaRestAPI.Controllers
     public class UsersController : ControllerBase
     {
         readonly ILogger<UsersController> _logger;
-        private readonly IUserService _userService;
         private readonly SignInManager<User> _signInManager;
         private readonly TokenService _tokenService;
         private readonly UserManager<User> _userMananger;
 
-        public UsersController(ILogger<UsersController> logger, IUserService userService, UserManager<User> userManager, SignInManager<User> signInManager, TokenService tokenService)
+        public UsersController(ILogger<UsersController> logger, UserManager<User> userManager, SignInManager<User> signInManager, TokenService tokenService)
         {
             _logger = logger;
-            _userService = userService;
             _signInManager = signInManager;
             _tokenService = tokenService;
             _userMananger = userManager;

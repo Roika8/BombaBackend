@@ -1,25 +1,11 @@
-using BLL;
-using BLL.Classes;
-using BLL.Core;
-using BLL.Interfaces;
-using BLL.PortfolioInstruments;
 using BombaRestAPI.Extensions;
-using DAL;
-using DAL.Interfaces;
-using DAL.Repositories;
-using MediatR;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Server.IISIntegration;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
 
 namespace BombaRestAPI
 {

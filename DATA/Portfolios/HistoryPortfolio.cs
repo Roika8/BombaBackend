@@ -7,6 +7,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DATA.Portfolios
 {
-    public class HistoryPortfolio : BasePortfolio<HistoryInstument>
+    public class HistoryPortfolio : BasePortfolio<HistoryInstrument>
     { }
 }

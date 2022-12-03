@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BLL.PortfolioInstruments
 {
-    public class DeleteInstrument
+    public class DeleteHistoryInstrument
     {
         public class Command : IRequest
         {

@@ -1,7 +1,4 @@
-﻿using BLL.Classes;
-using BLL.Core;
-using BLL.Interfaces;
-using BLL;
+﻿using BLL.Core;
 using DAL.Interfaces;
 using DAL.Repositories;
 using DAL;
@@ -10,12 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using BLL.PortfolioInstruments;
-using BLL.MainPortfolio;
-using DATA;
 using System;
-using System.Collections.Generic;
-using static BLL.MainPortfolio.GenericPortfolioDetailsGetter;
 
 namespace BombaRestAPI.Extensions
 {
@@ -27,9 +19,6 @@ namespace BombaRestAPI.Extensions
             services.AddScoped<IPortfolioRepository, PortfolioRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
-
-            services.AddSingleton<IGenericPortfolioService, GenericPortfolioService>();
-            services.AddSingleton<IUserService, UserService>();
 
             services.AddDbContext<MainDataContext>(ops =>
             {

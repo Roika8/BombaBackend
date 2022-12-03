@@ -34,7 +34,7 @@ namespace BombaAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewPortfolio()
         {
-            return Ok(await Mediator.Send(new CreatePortfolio.Command()));
+            return Ok(await Mediator.Send(new CreateHistoryPortfolio.Command()));
         }
 
         //Edit portfolio . delete instruemnt
@@ -48,7 +48,7 @@ namespace BombaAPI.Controllers
         [HttpDelete("DeleteInstrument/{instrumentID}")]
         public async Task<ActionResult<PortfolioInstrument>> DeletePortfolioInstrument(int instrumentID)
         {
-            return Ok(await Mediator.Send(new DeleteInstrument.Command { InstrumentID = instrumentID }));
+            return Ok(await Mediator.Send(new DeleteHistoryInstrument.Command { InstrumentID = instrumentID }));
         }
         [HttpPut("EditPortfolioInstrument/{instrumentID}")]
         public async Task<ActionResult<PortfolioInstrument>> EditPortfolioInstrument(int instrumentID, PortfolioInstrumentDto portfolioInstrumentDto)
@@ -63,7 +63,7 @@ namespace BombaAPI.Controllers
                 Units = portfolioInstrumentDto.Units,
                 InstrumentID = instrumentID
             };
-            return Ok(await Mediator.Send(new EditInstrument.Command { PortfolioInstrument = portfolioInstrument }));
+            return Ok(await Mediator.Send(new EditHistoryInstrument.Command { PortfolioInstrument = portfolioInstrument }));
         }
 
 
@@ -71,7 +71,7 @@ namespace BombaAPI.Controllers
         [HttpGet("GetSingleInstrument/{instrumentID}")]
         public async Task<ActionResult<PortfolioInstrument>> GetSinglePortfolioInstrument(int instrumentID)
         {
-            return await Mediator.Send(new InstrumentDetails.Query { InstrumentID = instrumentID });
+            return await Mediator.Send(new HistoryInstrumentDetails.Query { InstrumentID = instrumentID });
         }
 
         [Route("AddInstrumentToPortfolio")]
@@ -90,7 +90,7 @@ namespace BombaAPI.Controllers
             portfolioInstrument.Portfolio.PortfolioID = portfolioInstrumentDto.PortfolioID;
 
 
-            return Ok(await Mediator.Send(new CreateInstrument.Command { Instrument = portfolioInstrument }));
+            return Ok(await Mediator.Send(new CreateHistoryInstrument.Command { Instrument = portfolioInstrument }));
         }
         #endregion
 

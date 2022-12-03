@@ -9,16 +9,16 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BLL.PortfolioInstruments
+namespace BLL.HistorytPortfolio.Portfolios
 {
-    public class List
+    public class HistoryPortfolioGetter
     {
-        public class Query : IRequest<List<PortfolioInstrument>>
+        public class Query : IRequest<List<HistoryInstrument>>
         {
             public int PortfolioID { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, List<PortfolioInstrument>>
+        public class Handler : IRequestHandler<Query, List<HistoryInstrument>>
         {
             private readonly MainDataContext _context;
 
@@ -26,9 +26,9 @@ namespace BLL.PortfolioInstruments
             {
                 _context = context;
             }
-            public async Task<List<PortfolioInstrument>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<HistoryInstrument>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.PortfolioInstruments.Where(pi => pi.Portfolio.PortfolioID == request.PortfolioID).ToListAsync();
+                return await _context.HistoryInstuments.Where(pi => pi.Portfolio.PortfolioID == request.PortfolioID).ToListAsync(cancellationToken: cancellationToken);
             }
         }
     }

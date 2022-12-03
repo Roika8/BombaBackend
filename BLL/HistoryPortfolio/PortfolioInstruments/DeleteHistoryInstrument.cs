@@ -1,19 +1,15 @@
 ﻿using DAL;
-using DATA.Instruments;
-using DATA.Portfolios;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BLL.MainPortfolio
+namespace BLL.HistorytPortfolio.PortfolioInstruments
 {
-    public class CreateHistoryPortfolio
+    public class DeleteHistoryInstrument
     {
         public class Command : IRequest
         {
-
+            public int InstrumentID { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -25,13 +21,9 @@ namespace BLL.MainPortfolio
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                Portfolio portfolio = new Portfolio
-                {
-                    Instruments = new List<PortfolioInstrument>(),
-                    UserID = Guid.NewGuid()
-                };
-                _context.Portfolios.Add(portfolio);
-                await _context.SaveChangesAsync();
+                var historyInstrument = await _context.HistoryInstuments.FindAsync(new object[] { request.InstrumentID }, cancellationToken: cancellationToken);
+                _context.Remove(historyInstrument);
+                await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
         }

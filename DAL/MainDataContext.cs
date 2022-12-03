@@ -33,7 +33,7 @@ namespace DAL
         //public DbSet<User> Users { get; set; }
         public DbSet<CashData> CashDatas { get; set; }
 
-        public DbSet<HistoryInstument> HistoryInstuments { get; set; }
+        public DbSet<HistoryInstrument> HistoryInstuments { get; set; }
         public DbSet<HistoryPortfolio> HistoryPortfolios { get; set; }
 
         public DbSet<TrackingInstrument> TrackingInstruments { get; set; }

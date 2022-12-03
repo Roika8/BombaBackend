@@ -4,14 +4,12 @@ using DATA.Portfolios;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BLL.TrackingPortfolioHandlers.Portfolios
+namespace BLL.HistorytPortfolio.Portfolios
 {
-    public class CreateTrackingPortfolio
+    public class CreateHistoryPortfolio
     {
         public class Command : IRequest
         {
@@ -27,12 +25,12 @@ namespace BLL.TrackingPortfolioHandlers.Portfolios
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                TrackingPortfolio portfolio = new()
+                HistoryPortfolio portfolio = new()
                 {
-                    Instruments = new List<TrackingInstrument>(),
+                    Instruments = new List<HistoryInstrument>(),
                     UserID = Guid.NewGuid()
                 };
-                _context.TrackingPortfolios.Add(portfolio);
+                _context.HistoryPortfolios.Add(portfolio);
                 await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }

@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BLL.MainPortfolio
+namespace BLL.TrackingPortfolioHandler.Portfolios
 {
-    public class CreateHistoryPortfolio
+    public class CreateTrackingPortfolio
     {
         public class Command : IRequest
         {
@@ -25,13 +25,13 @@ namespace BLL.MainPortfolio
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                Portfolio portfolio = new Portfolio
+                TrackingPortfolio portfolio = new()
                 {
-                    Instruments = new List<PortfolioInstrument>(),
+                    Instruments = new List<TrackingInstrument>(),
                     UserID = Guid.NewGuid()
                 };
-                _context.Portfolios.Add(portfolio);
-                await _context.SaveChangesAsync();
+                _context.TrackingPortfolios.Add(portfolio);
+                await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
         }

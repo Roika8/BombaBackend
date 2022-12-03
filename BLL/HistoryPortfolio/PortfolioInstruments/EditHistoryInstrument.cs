@@ -5,13 +5,13 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BLL.PortfolioInstruments
+namespace BLL.HistorytPortfolio.PortfolioInstruments
 {
     public class EditHistoryInstrument
     {
         public class Command : IRequest
         {
-            public PortfolioInstrument PortfolioInstrument { get; set; }
+            public HistoryInstrument HistoryInstrument { get; set; }
         }
 
         public class Handler : IRequestHandler<Command>
@@ -26,11 +26,11 @@ namespace BLL.PortfolioInstruments
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                PortfolioInstrument instrument = await _context.PortfolioInstruments.FindAsync(new object[] { request.PortfolioInstrument.InstrumentID }, cancellationToken);
+                HistoryInstrument instrument = await _context.HistoryInstuments.FindAsync(new object[] { request.HistoryInstrument.InstrumentID }, cancellationToken);
 
-                _mapper.Map(request.PortfolioInstrument, instrument);
+                _mapper.Map(request.HistoryInstrument, instrument);
 
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
         }
