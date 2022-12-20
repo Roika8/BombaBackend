@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BLL.PortfolioInstruments
 {
-    public class HistoryInstrumentDetails
+    public class PortfolioInstrumentGetter
     {
         public class Query : IRequest<PortfolioInstrument>
         {
@@ -26,7 +26,7 @@ namespace BLL.PortfolioInstruments
             }
             public async Task<PortfolioInstrument> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.PortfolioInstruments.FindAsync(request.InstrumentID);
+                return await _context.PortfolioInstruments.FindAsync(new object[] { request.InstrumentID }, cancellationToken: cancellationToken);
             }
         }
     }

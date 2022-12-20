@@ -1,5 +1,6 @@
 ﻿using DAL;
 using DATA.Instruments;
+using DATA.Portfolios;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace BLL.MainPortfolio.Portfolios
 {
-    public class HistoryPortfolioGetter
+    public class MainPortfolioGetter
     {
-        public class Query : IRequest<List<PortfolioInstrument>>
+        public class Query : IRequest<Portfolio>
         {
             public int PortfolioID { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, List<PortfolioInstrument>>
+        public class Handler : IRequestHandler<Query, Portfolio>
         {
             private readonly MainDataContext _context;
 
@@ -26,9 +27,16 @@ namespace BLL.MainPortfolio.Portfolios
             {
                 _context = context;
             }
-            public async Task<List<PortfolioInstrument>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Portfolio> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.PortfolioInstruments.Where(pi => pi.Portfolio.PortfolioID == request.PortfolioID).ToListAsync();
+                var portfolioInstruments = await _context.PortfolioInstruments.Where(pi => pi.Portfolio.PortfolioID == request.PortfolioID)
+                    .ToListAsync(cancellationToken: cancellationToken);
+
+                return new Portfolio
+                {
+                    PortfolioID = request.PortfolioID,
+                    Instruments = portfolioInstruments
+                };
             }
         }
     }

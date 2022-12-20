@@ -9,12 +9,9 @@ using System.Threading.Tasks;
 
 namespace BLL.MainPortfolio
 {
-    public class CreateHistoryPortfolio
+    public class CreatePortfolio
     {
-        public class Command : IRequest
-        {
-
-        }
+        public class Command : IRequest { }
         public class Handler : IRequestHandler<Command>
         {
             private readonly MainDataContext _context;
@@ -25,13 +22,13 @@ namespace BLL.MainPortfolio
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                Portfolio portfolio = new Portfolio
+                var portfolio = new Portfolio
                 {
                     Instruments = new List<PortfolioInstrument>(),
                     UserID = Guid.NewGuid()
                 };
                 _context.Portfolios.Add(portfolio);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
         }

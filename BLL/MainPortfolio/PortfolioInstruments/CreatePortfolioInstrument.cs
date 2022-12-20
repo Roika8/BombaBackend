@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.PortfolioInstruments
 {
-    public class CreateHistoryInstrument
+    public class CreatePortfolioInstrument
     {
         public class Command : IRequest
         {

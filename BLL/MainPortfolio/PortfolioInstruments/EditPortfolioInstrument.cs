@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.PortfolioInstruments
 {
-    public class EditHistoryInstrument
+    public class EditPortfolioInstrument
     {
         public class Command : IRequest
         {
@@ -30,7 +30,7 @@ namespace BLL.PortfolioInstruments
 
                 _mapper.Map(request.PortfolioInstrument, instrument);
 
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
         }
