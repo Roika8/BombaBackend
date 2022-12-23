@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.TrackingPortfolioHandler.TrackingInstruments
 {
-    internal class TrackingInstrumentDetails
+    public class GetTrackingInstrument
     {
         public class Query : IRequest<TrackingInstrument>
         {

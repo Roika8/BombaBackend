@@ -6,7 +6,6 @@ namespace BombaRestAPI.Properties.DTOs
 {
     public class PortfolioInstrumentDto
     {
-        public int PortfolioID { get; set; }
         public string Symbol { get; set; }
         public decimal AvgPrice { get; set; }
         public decimal Units { get; set; }

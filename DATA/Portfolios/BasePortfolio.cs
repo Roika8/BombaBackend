@@ -8,7 +8,7 @@ namespace DATA.Portfolios
     public abstract class BasePortfolio<T>
     {
         [Key]
-        public int PortfolioID { get; set; }
+        public Guid PortfolioID { get; set; }
 
         [ForeignKey("UserID")]
         public Guid UserID { get; set; }

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BLL.HistorytPortfolio.Portfolios
 {
-    public class HistoryPortfolioGetter
+    public class GetHistoryPortfolio
     {
         public class Query : IRequest<HistoryPortfolio>
         {

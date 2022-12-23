@@ -22,9 +22,9 @@ namespace BLL.PortfolioInstruments
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var portfolio = await _context.Portfolios.FindAsync(request.Instrument.Portfolio.PortfolioID);
+                var portfolio = await _context.Portfolios.FindAsync(new object[] { request.Instrument.Portfolio.PortfolioID }, cancellationToken: cancellationToken);
                 portfolio.Instruments.Add(request.Instrument);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
         }

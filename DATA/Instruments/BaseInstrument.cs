@@ -11,7 +11,7 @@ namespace DATA.Instruments
     public abstract class BaseInstrument<T>
     {
         [Key]
-        public int InstrumentID { get; set; }
+        public Guid InstrumentID { get; set; }
 
         [ForeignKey("PortfolioID")]
         public virtual T Portfolio { get; set; }

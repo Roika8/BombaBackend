@@ -1,15 +1,11 @@
-﻿using BLL.MainPortfolio.Portfolios;
-using BLL.PortfolioInstruments;
-using BombaRestAPI.Properties.DTOs;
-using DATA.Enums;
-using DATA.Instruments;
+﻿using DATA.Instruments;
 using DATA.Portfolios;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Threading;
 using BLL.HistorytPortfolio.Portfolios;
 using BLL.HistorytPortfolio.PortfolioInstruments;
+using BombaRestAPI.Properties.DTOs.InstumentsDtos;
 
 namespace BombaRestAPI.Controllers
 {
@@ -20,9 +16,9 @@ namespace BombaRestAPI.Controllers
         #region History Portfolio
 
         [HttpGet("GetPortfolio/{id}")]
-        public async Task<ActionResult<HistoryPortfolio>> GetPortfolio(int id, CancellationToken cancellationToken)
+        public async Task<ActionResult<HistoryPortfolio>> GetPortfolio(int portfolioId, CancellationToken cancellationToken)
         {
-            return await Mediator.Send(new HistoryPortfolioGetter.Query { PortfolioID = id }, cancellationToken);
+            return await Mediator.Send(new GetHistoryPortfolio.Query { PortfolioID = portfolioId }, cancellationToken);
         }
 
         [Route("AddPortfolio")]
@@ -31,62 +27,53 @@ namespace BombaRestAPI.Controllers
         {
             return Ok(await Mediator.Send(new CreateHistoryPortfolio.Command()));
         }
-
-        //Edit portfolio . delete instruemnt
-        //Edit instrument. edit data
         #endregion
 
 
 
-        #region Instruments in portfolio
+        #region Instruments in  history portfolio
 
         [HttpDelete("DeleteInstrument/{instrumentID}")]
-        public async Task<ActionResult<DeleteHistoryInstrument>> DeletePortfolioInstrument(int instrumentID)
+        public async Task<ActionResult<DeleteHistoryInstrument>> DeleteHistoryInstrument(int instrumentID)
         {
             return Ok(await Mediator.Send(new DeleteHistoryInstrument.Command { InstrumentID = instrumentID }));
         }
 
-        [HttpPut("EditPortfolioInstrument/{instrumentID}")]
-        public async Task<ActionResult<PortfolioInstrument>> EditPortfolioInstrument(int instrumentID, PortfolioInstrumentDto portfolioInstrumentDto)
+        [HttpPut("EditInstrument/{instrumentID}")]
+        public async Task<ActionResult<EditHistoryInstrument>> EditHistoryInstrument(int instrumentID, HistoryInstrumentDto portfolioInstrumentDto)
         {
-            PortfolioInstrument portfolioInstrument = new()
+            HistoryInstrument historyInstrument = new()
             {
-                AvgPrice = portfolioInstrumentDto.AvgPrice,
-                ChartPattern = (ChartPattern)portfolioInstrumentDto.ChartPattern,
-                StopLoss = portfolioInstrumentDto.StopLoss,
-                Symbol = portfolioInstrumentDto.Symbol,
-                TakeProfit = portfolioInstrumentDto.TakeProfit,
+                ActionOccuredPrice = portfolioInstrumentDto.ActionOccuredPrice,
+                ProfitLoss = portfolioInstrumentDto.ProfitLoss,
+                RequestOccured = portfolioInstrumentDto.RequestOccured,
                 Units = portfolioInstrumentDto.Units,
                 InstrumentID = instrumentID
             };
-            return Ok(await Mediator.Send(new EditPortfolioInstrument.Command { PortfolioInstrument = portfolioInstrument }));
+            return Ok(await Mediator.Send(new EditHistoryInstrument.Command { HistoryInstrument = historyInstrument }));
         }
-
-
 
         [HttpGet("GetSingleInstrument/{instrumentID}")]
-        public async Task<ActionResult<PortfolioInstrument>> GetSinglePortfolioInstrument(int instrumentID)
+        public async Task<ActionResult<HistoryInstrument>> GetSingleHistoryInstrument(int instrumentID)
         {
-            return await Mediator.Send(new PortfolioInstrumentGetter.Query { InstrumentID = instrumentID });
+            return await Mediator.Send(new GetHistoryInstrument.Query { InstrumentID = instrumentID });
         }
 
-        [Route("AddInstrumentToPortfolio")]
+        [Route("AddInstrumentToHistory")]
         [HttpPost]
-        public async Task<IActionResult> AddPortfolioInstrument(PortfolioInstrumentDto portfolioInstrumentDto)
+        public async Task<IActionResult> AddHistoryInstrument(int portfolioID, HistoryInstrumentDto historyInstrumentDto)
         {
-            PortfolioInstrument portfolioInstrument = new()
+            HistoryInstrument historyInstrument = new()
             {
-                AvgPrice = portfolioInstrumentDto.AvgPrice,
-                ChartPattern = (ChartPattern)portfolioInstrumentDto.ChartPattern,
-                StopLoss = portfolioInstrumentDto.StopLoss,
-                Symbol = portfolioInstrumentDto.Symbol,
-                TakeProfit = portfolioInstrumentDto.TakeProfit,
-                Units = portfolioInstrumentDto.Units,
+                ActionOccuredPrice = historyInstrumentDto.ActionOccuredPrice,
+                ProfitLoss = historyInstrumentDto.ProfitLoss,
+                RequestOccured = historyInstrumentDto.RequestOccured,
+                Units = historyInstrumentDto.Units,
             };
-            portfolioInstrument.Portfolio.PortfolioID = portfolioInstrumentDto.PortfolioID;
+            historyInstrument.Portfolio.PortfolioID = portfolioID;
 
 
-            return Ok(await Mediator.Send(new CreatePortfolioInstrument.Command { Instrument = portfolioInstrument }));
+            return Ok(await Mediator.Send(new CreateHistoryInstrument.Command { Instrument = historyInstrument }));
         }
         #endregion
 

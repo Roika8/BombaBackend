@@ -8,15 +8,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BLL.PortfolioInstruments
+namespace BLL.HistorytPortfolio.PortfolioInstruments
 {
-    public class PortfolioInstrumentGetter
+    public class GetHistoryInstrument
     {
-        public class Query : IRequest<PortfolioInstrument>
+        public class Query : IRequest<HistoryInstrument>
         {
             public int InstrumentID { get; set; }
         }
-        public class Handler : IRequestHandler<Query, PortfolioInstrument>
+        public class Handler : IRequestHandler<Query, HistoryInstrument>
         {
             private readonly MainDataContext _context;
 
@@ -24,9 +24,9 @@ namespace BLL.PortfolioInstruments
             {
                 _context = context;
             }
-            public async Task<PortfolioInstrument> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<HistoryInstrument> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.PortfolioInstruments.FindAsync(new object[] { request.InstrumentID }, cancellationToken: cancellationToken);
+                return await _context.HistoryInstuments.FindAsync(new object[] { request.InstrumentID }, cancellationToken: cancellationToken);
             }
         }
     }

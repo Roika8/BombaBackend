@@ -3,6 +3,7 @@ using BLL.MainPortfolio.Portfolios;
 using BLL.PortfolioInstruments;
 using BombaRestAPI.Controllers;
 using BombaRestAPI.Properties.DTOs;
+using BombaRestAPI.Properties.DTOs.InstumentsDtos;
 using DATA.Enums;
 using DATA.Instruments;
 using DATA.Portfolios;
@@ -24,7 +25,7 @@ namespace BombaAPI.Controllers
         [HttpGet("GetPortfolio/{id}")]
         public async Task<ActionResult<Portfolio>> GetPortfolio(int id, CancellationToken cancellationToken)
         {
-            return await Mediator.Send(new MainPortfolioGetter.Query { PortfolioID = id }, cancellationToken);
+            return await Mediator.Send(new GetMainPortfolio.Query { PortfolioID = id }, cancellationToken);
         }
 
         [Route("AddPortfolio")]
@@ -53,10 +54,9 @@ namespace BombaAPI.Controllers
                 AvgPrice = portfolioInstrumentDto.AvgPrice,
                 ChartPattern = (ChartPattern)portfolioInstrumentDto.ChartPattern,
                 StopLoss = portfolioInstrumentDto.StopLoss,
-                Symbol = portfolioInstrumentDto.Symbol,
                 TakeProfit = portfolioInstrumentDto.TakeProfit,
                 Units = portfolioInstrumentDto.Units,
-                InstrumentID = instrumentID
+                InstrumentID = instrumentID,
             };
             return Ok(await Mediator.Send(new EditPortfolioInstrument.Command { PortfolioInstrument = portfolioInstrument }));
         }
@@ -66,12 +66,12 @@ namespace BombaAPI.Controllers
         [HttpGet("GetSingleInstrument/{instrumentID}")]
         public async Task<ActionResult<PortfolioInstrument>> GetSinglePortfolioInstrument(int instrumentID)
         {
-            return await Mediator.Send(new PortfolioInstrumentGetter.Query { InstrumentID = instrumentID });
+            return await Mediator.Send(new GetPortfolioInstrument.Query { InstrumentID = instrumentID });
         }
 
         [Route("AddInstrumentToPortfolio")]
         [HttpPost]
-        public async Task<IActionResult> AddPortfolioInstrument(PortfolioInstrumentDto portfolioInstrumentDto)
+        public async Task<IActionResult> AddPortfolioInstrument(int portfolioID, PortfolioInstrumentDto portfolioInstrumentDto)
         {
             PortfolioInstrument portfolioInstrument = new()
             {
@@ -82,7 +82,7 @@ namespace BombaAPI.Controllers
                 TakeProfit = portfolioInstrumentDto.TakeProfit,
                 Units = portfolioInstrumentDto.Units,
             };
-            portfolioInstrument.Portfolio.PortfolioID = portfolioInstrumentDto.PortfolioID;
+            portfolioInstrument.Portfolio.PortfolioID = portfolioID;
 
 
             return Ok(await Mediator.Send(new CreatePortfolioInstrument.Command { Instrument = portfolioInstrument }));
