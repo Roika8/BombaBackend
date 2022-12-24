@@ -10,7 +10,7 @@ namespace DATA
         public int CashDataID { get;  set; }
 
         [ForeignKey("UserID")]
-        public User User { get;  set; }
+        public virtual User User { get;  set; }
 
         public decimal Cash { get;  set; }
         public decimal Invested { get;  set; }

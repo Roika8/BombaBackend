@@ -1,5 +1,10 @@
+using DAL;
+using DATA;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,11 +16,24 @@ namespace BombaRestAPI
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-            //sa
-
+            var host = CreateHostBuilder(args).Build();
+            using var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
+            try
+            {
+                var context = services.GetRequiredService<UserDataContext>();
+                var userManager = services.GetRequiredService<UserManager<User>>();
+                await context.Database.MigrateAsync();
+                await Seeder.SeedUsers(context, userManager);
+            }
+            catch (Exception e)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(e, "An error occured during migration");
+            }
+            await host.RunAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -24,6 +42,6 @@ namespace BombaRestAPI
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-        
+
     }
 }

@@ -1,19 +1,11 @@
-using BLL;
-using BLL.Classes;
-using BLL.Interfaces;
-using DAL;
-using DAL.Interfaces;
-using DAL.Repositories;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using BombaRestAPI.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.IISIntegration;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 namespace BombaRestAPI
 {
@@ -29,26 +21,17 @@ namespace BombaRestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddScoped<IPortfolioInstrumentRepository, PortfolioInstrumentRepository>();
-            services.AddScoped<IPortfolioRepository, PortfolioRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-
-
-            services.AddSingleton<IMainPortfolioService, MainPortfolioService>();
-            services.AddSingleton<IUserService, UserService>();
-
-            services.AddDbContext<DataContext>(ops =>
+            services.AddControllers(opt =>
             {
-                ops.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                opt.Filters.Add(new AuthorizeFilter(policy));
+            }).AddNewtonsoftJson(ops =>
+            {
+                ops.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BombaAPI", Version = "v1" });
-            });
-
+            services.AddIdentityService(_config);
+            services.AddApplicationServices(_config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,11 +43,18 @@ namespace BombaRestAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BombaRestAPI v1"));
+
             }
 
             app.UseRouting();
 
+            app.UseCors("CorsPolicy");
+
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

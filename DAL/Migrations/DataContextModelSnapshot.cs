@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(MainDataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -32,8 +32,8 @@ namespace DAL.Migrations
                     b.Property<decimal>("Invested")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("UserID")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CashDataID");
 
@@ -81,8 +81,8 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<Guid?>("UserID")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("PortfolioID");
 
@@ -98,12 +98,10 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<Guid?>("UserID")
+                    b.Property<Guid>("UserID")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PortfolioID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Portfolios");
                 });
@@ -118,11 +116,20 @@ namespace DAL.Migrations
                     b.Property<decimal>("AvgPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("ChartPattern")
+                        .HasColumnType("int");
+
                     b.Property<int?>("PortfolioID")
                         .HasColumnType("int");
 
+                    b.Property<decimal?>("StopLoss")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Symbol")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("TakeProfit")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Units")
                         .HasColumnType("decimal(18,2)");
@@ -181,8 +188,8 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<Guid?>("UserID")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("PortfolioID");
 
@@ -193,19 +200,60 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DATA.User", b =>
                 {
-                    b.Property<Guid>("UserID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserID");
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Users");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("DATA.CashData", b =>
@@ -227,15 +275,6 @@ namespace DAL.Migrations
                 });
 
             modelBuilder.Entity("DATA.HistoryPortfolio", b =>
-                {
-                    b.HasOne("DATA.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DATA.Portfolio", b =>
                 {
                     b.HasOne("DATA.User", "User")
                         .WithMany()

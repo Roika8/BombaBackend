@@ -1,5 +1,6 @@
 ﻿using DAL.Interfaces;
-using DATA;
+using DATA.Instruments;
+using DATA.Portfolios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace DAL.Repositories
 {
     public class PortfolioInstrumentRepository : IPortfolioInstrumentRepository
     {
-        private DataContext dbContext;
-        public PortfolioInstrumentRepository(DataContext _dbContext)
+        private MainDataContext dbContext;
+        public PortfolioInstrumentRepository(MainDataContext _dbContext)
         {
             this.dbContext = _dbContext;
         }

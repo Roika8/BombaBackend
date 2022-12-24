@@ -12,15 +12,15 @@ namespace DAL.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly DataContext _dbContext;
+        private readonly UserDataContext _dbContext;
 
-        public UserRepository(DataContext dbContext)
+        public UserRepository(UserDataContext dbContext)
         {
             this._dbContext = dbContext;
         }
         #region Private methoods
 
-        private async Task<bool> RegisterUser(User userData)
+        private async Task<Guid> RegisterUser(User userData)
         {
             try
             {
@@ -29,14 +29,15 @@ namespace DAL.Repositories
                 if (!foundUser)
                 {
                     await _dbContext.Users.AddAsync(userData);
-                    return _dbContext.SaveChanges() > 0;
+                    _dbContext.SaveChanges();
+                    return new Guid();
+                    //return userData.UserID;
                 }
                 else throw new Exception("User already exists");
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                return false;
+                throw new Exception(e.InnerException.Message);
             }
 
         }
@@ -44,12 +45,13 @@ namespace DAL.Repositories
         {
             try
             {
-                User user = _dbContext.Users.Where(user => user.UserID == userID).ToListAsync().Result.FirstOrDefault();
-                if (user == null)
-                {
-                    throw new ArgumentOutOfRangeException("User id could not be found");
-                }
-                else return user;
+                return null;
+                //User user = _dbContext.Users.Where(user => user.UserID == userID).ToListAsync().Result.FirstOrDefault();
+                //if (user == null)
+                //{
+                //    throw new ArgumentOutOfRangeException("User id could not be found");
+                //}
+                //else return user;
             }
             catch (Exception ex)
             {
@@ -61,10 +63,11 @@ namespace DAL.Repositories
         {
             try
             {
-                User foundUser = _dbContext.Users.Where(user => user.Email == email && user.Password == password)
-                                  .ToList().FirstOrDefault();
-                
-                return foundUser != null;
+                return false;
+                //User foundUser = _dbContext.Users.Where(user => user.Email == email && user.Password == password)
+                //                  .ToList().FirstOrDefault();
+
+                //return foundUser != null;
             }
             catch (Exception ex)
             {
@@ -84,7 +87,7 @@ namespace DAL.Repositories
                 throw new Exception(e.Message);
             }
         }
-        public Task<bool> RegisterUserAsync(User userData)
+        public Task<Guid> RegisterUserAsync(User userData)
         {
             try
             {
@@ -96,15 +99,28 @@ namespace DAL.Repositories
                 throw new Exception(e.Message);
             }
         }
-        public Task<bool> CheckUserExistAsync(string email, string password)
+        public Task<bool> CheckUserDataExistAsync(string email, string password)
+        {
+            return null;
+            //try
+            //{
+            //    return Task.Run(() => CheckUserExist(email, password));
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception(ex.Message);
+            //}
+        }
+        public async Task<bool> CheckEmailExistsAsync(string email)
         {
             try
             {
-                return Task.Run(() => CheckUserExist(email, password));
+                var res = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+                return res != null;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(e.Message);
             }
         }
     }

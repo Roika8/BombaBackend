@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(MainDataContext))]
     [Migration("20220507204403_changeKeyName")]
     partial class changeKeyName
     {
