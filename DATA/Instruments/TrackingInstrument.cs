@@ -7,6 +7,6 @@ namespace DATA.Instruments
 {
     public class TrackingInstrument : BaseInstrument<TrackingPortfolio>
     {
-        public virtual ICollection<TrackingInstumentPrice> TrackingPrices { get; set; }
+        public virtual ICollection<TrackingInstrumentPrice> TrackingPrices { get; set; }
     }
 }

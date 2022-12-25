@@ -25,7 +25,8 @@ namespace BLL.MainPortfolio
                 var portfolio = new Portfolio
                 {
                     Instruments = new List<PortfolioInstrument>(),
-                    UserID = Guid.NewGuid()
+                    UserID = Guid.NewGuid(),
+                    PortfolioID = Guid.NewGuid()
                 };
                 _context.Portfolios.Add(portfolio);
                 await _context.SaveChangesAsync(cancellationToken);

@@ -30,7 +30,7 @@ namespace BLL.TrackingPortfolioHandler.TrackingInstruments
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                TrackingInstrument instrument = await _context.TrackingInstruments.FindAsync(new object[] { request.TrackingInstrument.InstrumentID }, cancellationToken);
+                TrackingInstrument instrument = await _context.TrackingInstruments.FindAsync(new object[] { request.TrackingInstrument.InstrumentId }, cancellationToken);
 
                 _mapper.Map(request.TrackingInstrument, instrument);
 

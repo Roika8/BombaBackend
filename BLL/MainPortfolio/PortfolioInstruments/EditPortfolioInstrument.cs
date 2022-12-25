@@ -26,7 +26,7 @@ namespace BLL.PortfolioInstruments
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                PortfolioInstrument instrument = await _context.PortfolioInstruments.FindAsync(new object[] { request.PortfolioInstrument.InstrumentID }, cancellationToken);
+                PortfolioInstrument instrument = await _context.PortfolioInstruments.FindAsync(new object[] { request.PortfolioInstrument.InstrumentId }, cancellationToken);
 
                 _mapper.Map(request.PortfolioInstrument, instrument);
 

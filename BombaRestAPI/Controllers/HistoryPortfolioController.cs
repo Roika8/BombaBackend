@@ -41,7 +41,7 @@ namespace BombaRestAPI.Controllers
         }
 
         [HttpPut("EditInstrument/{instrumentID}")]
-        public async Task<ActionResult<EditHistoryInstrument>> EditHistoryInstrument(Guid instrumentID, HistoryInstrumentDto portfolioInstrumentDto)
+        public async Task<ActionResult<EditHistoryInstrument>> EditHistoryInstrument(int instrumentID, HistoryInstrumentDto portfolioInstrumentDto)
         {
             HistoryInstrument historyInstrument = new()
             {
@@ -49,7 +49,7 @@ namespace BombaRestAPI.Controllers
                 ProfitLoss = portfolioInstrumentDto.ProfitLoss,
                 RequestOccured = portfolioInstrumentDto.RequestOccured,
                 Units = portfolioInstrumentDto.Units,
-                InstrumentID = instrumentID
+                InstrumentId = instrumentID
             };
             return Ok(await Mediator.Send(new EditHistoryInstrument.Command { HistoryInstrument = historyInstrument }));
         }

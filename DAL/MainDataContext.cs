@@ -14,23 +14,40 @@ namespace DAL
     {
         public MainDataContext([NotNull] DbContextOptions<MainDataContext> options) : base(options)
         {
-           
+
         }
-      
-   
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Portfolio>()
-                   .HasMany(c => c.Instruments)
-                   .WithOne(e => e.Portfolio);
+
+            builder.Entity<HistoryInstrument>()
+                 .HasOne(h => h.Portfolio)
+                 .WithMany(hp => hp.Instruments)
+                 .HasForeignKey(hi => hi.PortfolioId);
+
+          
+            builder.Entity<PortfolioInstrument>()
+                 .HasOne(h => h.Portfolio)
+                 .WithMany(hp => hp.Instruments)
+                 .HasForeignKey(hi => hi.PortfolioId);
+
+            builder.Entity<TrackingInstrument>()
+             .HasOne(h => h.Portfolio)
+             .WithMany(hp => hp.Instruments)
+             .HasForeignKey(hi => hi.PortfolioId);
+
+
+            builder.Entity<TrackingInstrument>()
+                .HasMany(c => c.TrackingPrices)
+                .WithOne(tp => tp.Instrument)
+                .HasForeignKey(tp => tp.InstrumentID);
 
             base.OnModelCreating(builder);
 
         }
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<PortfolioInstrument> PortfolioInstruments { get; set; }
-
-        //public DbSet<User> Users { get; set; }
         public DbSet<CashData> CashDatas { get; set; }
 
         public DbSet<HistoryInstrument> HistoryInstuments { get; set; }
@@ -38,6 +55,6 @@ namespace DAL
 
         public DbSet<TrackingInstrument> TrackingInstruments { get; set; }
         public DbSet<TrackingPortfolio> TrackingPortfolios { get; set; }
-        public DbSet<TrackingInstumentPrice> TrackingInstumentsPrice { get; set; }
+        public DbSet<TrackingInstrumentPrice> TrackingInstumentsPrice { get; set; }
     }
 }

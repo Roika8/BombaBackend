@@ -48,10 +48,10 @@ namespace BombaRestAPI.Controllers
         }
 
         [HttpPut("EditInstrument/{instrumentID}")]
-        public async Task<ActionResult<EditTrackingInstrument>> EditTrackingInstrument(Guid instrumentID, TrackingInstrumentDto trackingInstrumentDto)
+        public async Task<ActionResult<EditTrackingInstrument>> EditTrackingInstrument(int instrumentID, TrackingInstrumentDto trackingInstrumentDto)
         {
             var trackingPricesList = trackingInstrumentDto.TrackingPrices.Select(price =>
-                                  new TrackingInstumentPrice
+                                  new TrackingInstrumentPrice
                                   {
                                       InstrumentID = instrumentID,
                                       Price = price
@@ -59,7 +59,7 @@ namespace BombaRestAPI.Controllers
 
             TrackingInstrument trackingInstrument = new()
             {
-                InstrumentID = instrumentID,
+                InstrumentId = instrumentID,
                 TrackingPrices = trackingPricesList,
             };
             return Ok(await Mediator.Send(new EditTrackingInstrument.Command { TrackingInstrument = trackingInstrument }));
@@ -76,7 +76,7 @@ namespace BombaRestAPI.Controllers
         public async Task<IActionResult> AddTrackingInstrument(Guid portfolioID, TrackingInstrumentDto trackingInstrumentDto)
         {
             var trackingPricesList = trackingInstrumentDto.TrackingPrices.Select(price =>
-                                  new TrackingInstumentPrice
+                                  new TrackingInstrumentPrice
                                   {
                                       Price = price
                                   }).ToList();

@@ -26,7 +26,7 @@ namespace BLL.HistorytPortfolio.PortfolioInstruments
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                HistoryInstrument instrument = await _context.HistoryInstuments.FindAsync(new object[] { request.HistoryInstrument.InstrumentID }, cancellationToken);
+                HistoryInstrument instrument = await _context.HistoryInstuments.FindAsync(new object[] { request.HistoryInstrument.InstrumentId }, cancellationToken);
 
                 _mapper.Map(request.HistoryInstrument, instrument);
 

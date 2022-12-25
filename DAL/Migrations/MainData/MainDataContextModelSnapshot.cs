@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DAL.Migrations
+namespace DAL.Migrations.MainData
 {
     [DbContext(typeof(MainDataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    partial class MainDataContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -42,24 +42,24 @@ namespace DAL.Migrations
                     b.ToTable("CashDatas");
                 });
 
-            modelBuilder.Entity("DATA.HistoryInstument", b =>
+            modelBuilder.Entity("DATA.Instruments.HistoryInstrument", b =>
                 {
-                    b.Property<int>("InstrumentID")
+                    b.Property<int>("InstrumentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<bool>("IsFromMainPortfolio")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("MarketValue")
+                    b.Property<decimal>("ActionOccuredPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("PortfolioID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PortfolioId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("ProfitLose")
+                    b.Property<decimal>("ProfitLoss")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("RequestOccured")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Symbol")
                         .HasColumnType("nvarchar(max)");
@@ -67,48 +67,16 @@ namespace DAL.Migrations
                     b.Property<decimal>("Units")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("InstrumentID");
+                    b.HasKey("InstrumentId");
 
-                    b.HasIndex("PortfolioID");
+                    b.HasIndex("PortfolioId");
 
                     b.ToTable("HistoryInstuments");
                 });
 
-            modelBuilder.Entity("DATA.HistoryPortfolio", b =>
+            modelBuilder.Entity("DATA.Instruments.PortfolioInstrument", b =>
                 {
-                    b.Property<int>("PortfolioID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("PortfolioID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("HistoryPortfolios");
-                });
-
-            modelBuilder.Entity("DATA.Portfolio", b =>
-                {
-                    b.Property<int>("PortfolioID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<Guid>("UserID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("PortfolioID");
-
-                    b.ToTable("Portfolios");
-                });
-
-            modelBuilder.Entity("DATA.PortfolioInstrument", b =>
-                {
-                    b.Property<int>("InstrumentID")
+                    b.Property<int>("InstrumentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -119,8 +87,8 @@ namespace DAL.Migrations
                     b.Property<int>("ChartPattern")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PortfolioID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PortfolioId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal?>("StopLoss")
                         .HasColumnType("decimal(18,2)");
@@ -134,68 +102,93 @@ namespace DAL.Migrations
                     b.Property<decimal>("Units")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("InstrumentID");
+                    b.HasKey("InstrumentId");
 
-                    b.HasIndex("PortfolioID");
+                    b.HasIndex("PortfolioId");
 
                     b.ToTable("PortfolioInstruments");
                 });
 
-            modelBuilder.Entity("DATA.TrackingInstrument", b =>
+            modelBuilder.Entity("DATA.Instruments.TrackingInstrument", b =>
                 {
-                    b.Property<int>("InstrumentID")
+                    b.Property<int>("InstrumentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("PortfolioID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PortfolioId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Symbol")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("InstrumentID");
+                    b.HasKey("InstrumentId");
 
-                    b.HasIndex("PortfolioID");
+                    b.HasIndex("PortfolioId");
 
                     b.ToTable("TrackingInstruments");
                 });
 
-            modelBuilder.Entity("DATA.TrackingInstumentPrice", b =>
+            modelBuilder.Entity("DATA.Portfolios.HistoryPortfolio", b =>
                 {
-                    b.Property<int>("InstrumentTrackingPriceID")
+                    b.Property<Guid>("PortfolioID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PortfolioID");
+
+                    b.ToTable("HistoryPortfolios");
+                });
+
+            modelBuilder.Entity("DATA.Portfolios.Portfolio", b =>
+                {
+                    b.Property<Guid>("PortfolioID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PortfolioID");
+
+                    b.ToTable("Portfolios");
+                });
+
+            modelBuilder.Entity("DATA.Portfolios.TrackingPortfolio", b =>
+                {
+                    b.Property<Guid>("PortfolioID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PortfolioID");
+
+                    b.ToTable("TrackingPortfolios");
+                });
+
+            modelBuilder.Entity("DATA.TrackingInstrumentPrice", b =>
+                {
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<int>("InstrumentID")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("TrackingInstrumentInstrumentID")
-                        .HasColumnType("int");
+                    b.HasKey("ID");
 
-                    b.HasKey("InstrumentTrackingPriceID");
-
-                    b.HasIndex("TrackingInstrumentInstrumentID");
+                    b.HasIndex("InstrumentID");
 
                     b.ToTable("TrackingInstumentsPrice");
-                });
-
-            modelBuilder.Entity("DATA.TrackingPortfolio", b =>
-                {
-                    b.Property<int>("PortfolioID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("PortfolioID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("TrackingPortfolios");
                 });
 
             modelBuilder.Entity("DATA.User", b =>
@@ -265,74 +258,66 @@ namespace DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DATA.HistoryInstument", b =>
+            modelBuilder.Entity("DATA.Instruments.HistoryInstrument", b =>
                 {
-                    b.HasOne("DATA.HistoryPortfolio", "Portfolio")
+                    b.HasOne("DATA.Portfolios.HistoryPortfolio", "Portfolio")
                         .WithMany("Instruments")
-                        .HasForeignKey("PortfolioID");
+                        .HasForeignKey("PortfolioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Portfolio");
                 });
 
-            modelBuilder.Entity("DATA.HistoryPortfolio", b =>
+            modelBuilder.Entity("DATA.Instruments.PortfolioInstrument", b =>
                 {
-                    b.HasOne("DATA.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DATA.PortfolioInstrument", b =>
-                {
-                    b.HasOne("DATA.Portfolio", "Portfolio")
+                    b.HasOne("DATA.Portfolios.Portfolio", "Portfolio")
                         .WithMany("Instruments")
-                        .HasForeignKey("PortfolioID");
+                        .HasForeignKey("PortfolioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Portfolio");
                 });
 
-            modelBuilder.Entity("DATA.TrackingInstrument", b =>
+            modelBuilder.Entity("DATA.Instruments.TrackingInstrument", b =>
                 {
-                    b.HasOne("DATA.TrackingPortfolio", "Portfolio")
+                    b.HasOne("DATA.Portfolios.TrackingPortfolio", "Portfolio")
                         .WithMany("Instruments")
-                        .HasForeignKey("PortfolioID");
+                        .HasForeignKey("PortfolioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Portfolio");
                 });
 
-            modelBuilder.Entity("DATA.TrackingInstumentPrice", b =>
+            modelBuilder.Entity("DATA.TrackingInstrumentPrice", b =>
                 {
-                    b.HasOne("DATA.TrackingInstrument", null)
+                    b.HasOne("DATA.Instruments.TrackingInstrument", "Instrument")
                         .WithMany("TrackingPrices")
-                        .HasForeignKey("TrackingInstrumentInstrumentID");
+                        .HasForeignKey("InstrumentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Instrument");
                 });
 
-            modelBuilder.Entity("DATA.TrackingPortfolio", b =>
-                {
-                    b.HasOne("DATA.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DATA.HistoryPortfolio", b =>
-                {
-                    b.Navigation("Instruments");
-                });
-
-            modelBuilder.Entity("DATA.Portfolio", b =>
-                {
-                    b.Navigation("Instruments");
-                });
-
-            modelBuilder.Entity("DATA.TrackingInstrument", b =>
+            modelBuilder.Entity("DATA.Instruments.TrackingInstrument", b =>
                 {
                     b.Navigation("TrackingPrices");
                 });
 
-            modelBuilder.Entity("DATA.TrackingPortfolio", b =>
+            modelBuilder.Entity("DATA.Portfolios.HistoryPortfolio", b =>
+                {
+                    b.Navigation("Instruments");
+                });
+
+            modelBuilder.Entity("DATA.Portfolios.Portfolio", b =>
+                {
+                    b.Navigation("Instruments");
+                });
+
+            modelBuilder.Entity("DATA.Portfolios.TrackingPortfolio", b =>
                 {
                     b.Navigation("Instruments");
                 });

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DAL.Migrations.UserData
+namespace DAL.Migrations
 {
     [DbContext(typeof(UserDataContext))]
-    [Migration("20221121221228_changeDbContext")]
-    partial class changeDbContext
+    [Migration("20221225185543_initUserData")]
+    partial class initUserData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

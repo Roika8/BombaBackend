@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DAL.Migrations.UserData
+namespace DAL.Migrations
 {
-    public partial class changeDbContext : Migration
+    public partial class initUserData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

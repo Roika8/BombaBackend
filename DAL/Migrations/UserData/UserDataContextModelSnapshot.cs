@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DAL.Migrations.UserData
+namespace DAL.Migrations
 {
     [DbContext(typeof(UserDataContext))]
     partial class UserDataContextModelSnapshot : ModelSnapshot

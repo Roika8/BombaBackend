@@ -22,7 +22,7 @@ namespace BombaAPI.Controllers
 
         #region Portfolio
 
-        [HttpGet("GetPortfolio/{id}")]
+        [HttpGet("GetPortfolio/{portfolioID}")]
         public async Task<ActionResult<Portfolio>> GetPortfolio(Guid portfolioID, CancellationToken cancellationToken)
         {
             return await Mediator.Send(new GetMainPortfolio.Query { PortfolioID = portfolioID }, cancellationToken);
@@ -47,7 +47,7 @@ namespace BombaAPI.Controllers
         }
 
         [HttpPut("EditPortfolioInstrument/{instrumentID}")]
-        public async Task<ActionResult<PortfolioInstrument>> EditPortfolioInstrument(Guid instrumentID, PortfolioInstrumentDto portfolioInstrumentDto)
+        public async Task<ActionResult<PortfolioInstrument>> EditPortfolioInstrument(int instrumentID, PortfolioInstrumentDto portfolioInstrumentDto)
         {
             PortfolioInstrument portfolioInstrument = new()
             {
@@ -56,7 +56,7 @@ namespace BombaAPI.Controllers
                 StopLoss = portfolioInstrumentDto.StopLoss,
                 TakeProfit = portfolioInstrumentDto.TakeProfit,
                 Units = portfolioInstrumentDto.Units,
-                InstrumentID = instrumentID,
+                InstrumentId = instrumentID,
             };
             return Ok(await Mediator.Send(new EditPortfolioInstrument.Command { PortfolioInstrument = portfolioInstrument }));
         }
@@ -82,10 +82,7 @@ namespace BombaAPI.Controllers
                 TakeProfit = portfolioInstrumentDto.TakeProfit,
                 Units = portfolioInstrumentDto.Units,
             };
-            portfolioInstrument.Portfolio.PortfolioID = portfolioID;
-
-
-            return Ok(await Mediator.Send(new CreatePortfolioInstrument.Command { Instrument = portfolioInstrument }));
+            return Ok(await Mediator.Send(new CreatePortfolioInstrument.Command { Instrument = portfolioInstrument, PortfolioId = portfolioID }));
         }
         #endregion
 
