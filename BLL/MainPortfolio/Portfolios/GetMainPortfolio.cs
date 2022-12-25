@@ -16,7 +16,7 @@ namespace BLL.MainPortfolio.Portfolios
     {
         public class Query : IRequest<Portfolio>
         {
-            public int PortfolioID { get; set; }
+            public Guid PortfolioID { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, Portfolio>

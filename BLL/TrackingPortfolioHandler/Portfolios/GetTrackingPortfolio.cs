@@ -15,7 +15,7 @@ namespace BLL.TrackingPortfolioHandler.Portfolios
     {
         public class Query : IRequest<TrackingPortfolio>
         {
-            public int PortfolioID { get; set; }
+            public Guid PortfolioID { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, TrackingPortfolio>

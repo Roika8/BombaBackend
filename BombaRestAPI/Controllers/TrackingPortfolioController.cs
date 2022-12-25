@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using DATA;
 using System.Linq;
 using BombaRestAPI.Properties.DTOs;
+using System;
 
 namespace BombaRestAPI.Controllers
 {
@@ -23,9 +24,9 @@ namespace BombaRestAPI.Controllers
         #region Tracking Portfolio
 
         [HttpGet("GetPortfolio/{id}")]
-        public async Task<ActionResult<TrackingPortfolio>> GetPortfolio(int id, CancellationToken cancellationToken)
+        public async Task<ActionResult<TrackingPortfolio>> GetPortfolio(Guid portfolioID, CancellationToken cancellationToken)
         {
-            return await Mediator.Send(new GetTrackingPortfolio.Query { PortfolioID = id }, cancellationToken);
+            return await Mediator.Send(new GetTrackingPortfolio.Query { PortfolioID = portfolioID }, cancellationToken);
         }
 
         [Route("AddPortfolio")]
@@ -47,12 +48,12 @@ namespace BombaRestAPI.Controllers
         }
 
         [HttpPut("EditInstrument/{instrumentID}")]
-        public async Task<ActionResult<EditTrackingInstrument>> EditTrackingInstrument(int instrumentID, TrackingInstrumentDto trackingInstrumentDto)
+        public async Task<ActionResult<EditTrackingInstrument>> EditTrackingInstrument(Guid instrumentID, TrackingInstrumentDto trackingInstrumentDto)
         {
             var trackingPricesList = trackingInstrumentDto.TrackingPrices.Select(price =>
                                   new TrackingInstumentPrice
                                   {
-                                      InstrumentTrackingPriceID = instrumentID,
+                                      InstrumentID = instrumentID,
                                       Price = price
                                   }).ToList();
 
@@ -72,7 +73,7 @@ namespace BombaRestAPI.Controllers
 
         [Route("AddInstrumentToTracking")]
         [HttpPost]
-        public async Task<IActionResult> AddTrackingInstrument(int portfolioID, TrackingInstrumentDto trackingInstrumentDto)
+        public async Task<IActionResult> AddTrackingInstrument(Guid portfolioID, TrackingInstrumentDto trackingInstrumentDto)
         {
             var trackingPricesList = trackingInstrumentDto.TrackingPrices.Select(price =>
                                   new TrackingInstumentPrice

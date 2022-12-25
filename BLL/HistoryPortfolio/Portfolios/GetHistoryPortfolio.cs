@@ -16,7 +16,7 @@ namespace BLL.HistorytPortfolio.Portfolios
     {
         public class Query : IRequest<HistoryPortfolio>
         {
-            public int PortfolioID { get; set; }
+            public Guid PortfolioID { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, HistoryPortfolio>

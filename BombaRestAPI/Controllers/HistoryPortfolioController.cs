@@ -6,6 +6,7 @@ using System.Threading;
 using BLL.HistorytPortfolio.Portfolios;
 using BLL.HistorytPortfolio.PortfolioInstruments;
 using BombaRestAPI.Properties.DTOs.InstumentsDtos;
+using System;
 
 namespace BombaRestAPI.Controllers
 {
@@ -16,7 +17,7 @@ namespace BombaRestAPI.Controllers
         #region History Portfolio
 
         [HttpGet("GetPortfolio/{id}")]
-        public async Task<ActionResult<HistoryPortfolio>> GetPortfolio(int portfolioId, CancellationToken cancellationToken)
+        public async Task<ActionResult<HistoryPortfolio>> GetPortfolio(Guid portfolioId, CancellationToken cancellationToken)
         {
             return await Mediator.Send(new GetHistoryPortfolio.Query { PortfolioID = portfolioId }, cancellationToken);
         }
@@ -40,7 +41,7 @@ namespace BombaRestAPI.Controllers
         }
 
         [HttpPut("EditInstrument/{instrumentID}")]
-        public async Task<ActionResult<EditHistoryInstrument>> EditHistoryInstrument(int instrumentID, HistoryInstrumentDto portfolioInstrumentDto)
+        public async Task<ActionResult<EditHistoryInstrument>> EditHistoryInstrument(Guid instrumentID, HistoryInstrumentDto portfolioInstrumentDto)
         {
             HistoryInstrument historyInstrument = new()
             {
@@ -61,7 +62,7 @@ namespace BombaRestAPI.Controllers
 
         [Route("AddInstrumentToHistory")]
         [HttpPost]
-        public async Task<IActionResult> AddHistoryInstrument(int portfolioID, HistoryInstrumentDto historyInstrumentDto)
+        public async Task<IActionResult> AddHistoryInstrument(Guid portfolioID, HistoryInstrumentDto historyInstrumentDto)
         {
             HistoryInstrument historyInstrument = new()
             {

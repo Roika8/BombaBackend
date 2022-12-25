@@ -1,6 +1,5 @@
 ﻿using BLL.Core;
-using DAL.Interfaces;
-using DAL.Repositories;
+
 using DAL;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -15,9 +14,6 @@ namespace BombaRestAPI.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddScoped<IPortfolioInstrumentRepository, PortfolioInstrumentRepository>();
-            services.AddScoped<IPortfolioRepository, PortfolioRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
 
 
             services.AddDbContext<MainDataContext>(ops =>
@@ -35,7 +31,7 @@ namespace BombaRestAPI.Extensions
             });
 
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-          
+
             services.AddAutoMapper(typeof(Mapping).Assembly);
 
 

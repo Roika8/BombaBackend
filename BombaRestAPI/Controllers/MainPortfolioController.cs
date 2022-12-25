@@ -3,12 +3,12 @@ using BLL.MainPortfolio.Portfolios;
 using BLL.PortfolioInstruments;
 using BombaRestAPI.Controllers;
 using BombaRestAPI.Properties.DTOs;
-using BombaRestAPI.Properties.DTOs.InstumentsDtos;
 using DATA.Enums;
 using DATA.Instruments;
 using DATA.Portfolios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,9 +23,9 @@ namespace BombaAPI.Controllers
         #region Portfolio
 
         [HttpGet("GetPortfolio/{id}")]
-        public async Task<ActionResult<Portfolio>> GetPortfolio(int id, CancellationToken cancellationToken)
+        public async Task<ActionResult<Portfolio>> GetPortfolio(Guid portfolioID, CancellationToken cancellationToken)
         {
-            return await Mediator.Send(new GetMainPortfolio.Query { PortfolioID = id }, cancellationToken);
+            return await Mediator.Send(new GetMainPortfolio.Query { PortfolioID = portfolioID }, cancellationToken);
         }
 
         [Route("AddPortfolio")]
@@ -47,7 +47,7 @@ namespace BombaAPI.Controllers
         }
 
         [HttpPut("EditPortfolioInstrument/{instrumentID}")]
-        public async Task<ActionResult<PortfolioInstrument>> EditPortfolioInstrument(int instrumentID, PortfolioInstrumentDto portfolioInstrumentDto)
+        public async Task<ActionResult<PortfolioInstrument>> EditPortfolioInstrument(Guid instrumentID, PortfolioInstrumentDto portfolioInstrumentDto)
         {
             PortfolioInstrument portfolioInstrument = new()
             {
@@ -71,7 +71,7 @@ namespace BombaAPI.Controllers
 
         [Route("AddInstrumentToPortfolio")]
         [HttpPost]
-        public async Task<IActionResult> AddPortfolioInstrument(int portfolioID, PortfolioInstrumentDto portfolioInstrumentDto)
+        public async Task<IActionResult> AddPortfolioInstrument(Guid portfolioID, PortfolioInstrumentDto portfolioInstrumentDto)
         {
             PortfolioInstrument portfolioInstrument = new()
             {
