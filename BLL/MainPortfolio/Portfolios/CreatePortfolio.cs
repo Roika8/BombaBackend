@@ -25,6 +25,7 @@ namespace BLL.MainPortfolio
                 var portfolio = new Portfolio
                 {
                     Instruments = new List<PortfolioInstrument>(),
+                    //Todo change the UserID to the auth user
                     UserID = Guid.NewGuid(),
                     PortfolioID = Guid.NewGuid()
                 };

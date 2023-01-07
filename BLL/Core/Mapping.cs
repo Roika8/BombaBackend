@@ -12,7 +12,12 @@ namespace BLL.Core
     {
         public Mapping()
         {
-            CreateMap<PortfolioInstrument, PortfolioInstrument>();
+            //Doesnt need to change the portfolio proprties and instrument Symbol
+            CreateMap<PortfolioInstrument, PortfolioInstrument>()
+                .ForMember(instrument => instrument.Portfolio, action => action.Ignore())
+                .ForMember(instrument => instrument.PortfolioId, action => action.Ignore())
+                .ForMember(instrument => instrument.Symbol, action => action.Ignore());
+
         }
     }
 }

@@ -3,12 +3,15 @@ using BLL.MainPortfolio.Portfolios;
 using BLL.PortfolioInstruments;
 using BombaRestAPI.Controllers;
 using BombaRestAPI.Properties.DTOs;
+using BombaRestAPI.Properties.DTOs.PortfoliosDtos;
 using DATA.Enums;
 using DATA.Instruments;
 using DATA.Portfolios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,9 +26,27 @@ namespace BombaAPI.Controllers
         #region Portfolio
 
         [HttpGet("GetPortfolio/{portfolioID}")]
-        public async Task<ActionResult<Portfolio>> GetPortfolio(Guid portfolioID, CancellationToken cancellationToken)
+        public async Task<ActionResult<PortfolioDto>> GetPortfolio(Guid portfolioID, CancellationToken cancellationToken)
         {
-            return await Mediator.Send(new GetMainPortfolio.Query { PortfolioID = portfolioID }, cancellationToken);
+            var portfolio = await Mediator.Send(new GetMainPortfolio.Query { PortfolioID = portfolioID }, cancellationToken);
+            var portfolioInstrumentsDto = new List<PortfolioInstrumentDto>();
+
+            portfolio.Instruments.ToList().ForEach(instrument => portfolioInstrumentsDto.Add(new PortfolioInstrumentDto
+            {
+                AvgPrice = instrument.AvgPrice,
+                ChartPattern = instrument.ChartPattern,
+                StopLoss = instrument.StopLoss,
+                Symbol = instrument.Symbol,
+                TakeProfit = instrument.TakeProfit,
+                Units = instrument.Units
+            }));
+
+            return new PortfolioDto
+            {
+                PortfolioID = portfolioID,
+                UserID = portfolio.UserID,
+                PortfolioInstruments = portfolioInstrumentsDto
+            };
         }
 
         [Route("AddPortfolio")]
@@ -43,7 +64,16 @@ namespace BombaAPI.Controllers
         [HttpDelete("DeleteInstrument/{instrumentID}")]
         public async Task<ActionResult<PortfolioInstrument>> DeletePortfolioInstrument(int instrumentID)
         {
-            return Ok(await Mediator.Send(new DeletePortfolioInstrument.Command { InstrumentID = instrumentID }));
+            try
+            {
+                var res = await Mediator.Send(new DeletePortfolioInstrument.Command { InstrumentID = instrumentID });
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
         }
 
         [HttpPut("EditPortfolioInstrument/{instrumentID}")]
@@ -58,15 +88,25 @@ namespace BombaAPI.Controllers
                 Units = portfolioInstrumentDto.Units,
                 InstrumentId = instrumentID,
             };
-            return Ok(await Mediator.Send(new EditPortfolioInstrument.Command { PortfolioInstrument = portfolioInstrument }));
+            var res = await Mediator.Send(new EditPortfolioInstrument.Command { PortfolioInstrument = portfolioInstrument });
+            return Ok(res);
         }
 
 
 
         [HttpGet("GetSingleInstrument/{instrumentID}")]
-        public async Task<ActionResult<PortfolioInstrument>> GetSinglePortfolioInstrument(int instrumentID)
+        public async Task<ActionResult<PortfolioInstrumentDto>> GetSinglePortfolioInstrument(int instrumentID)
         {
-            return await Mediator.Send(new GetPortfolioInstrument.Query { InstrumentID = instrumentID });
+            var instrumentData = await Mediator.Send(new GetPortfolioInstrument.Query { InstrumentID = instrumentID });
+            return new PortfolioInstrumentDto
+            {
+                AvgPrice = instrumentData.AvgPrice,
+                ChartPattern = instrumentData.ChartPattern,
+                StopLoss = instrumentData.StopLoss,
+                Symbol = instrumentData.Symbol,
+                TakeProfit = instrumentData.TakeProfit,
+                Units = instrumentData.Units
+            };
         }
 
         [Route("AddInstrumentToPortfolio")]

@@ -32,11 +32,14 @@ namespace BLL.MainPortfolio.Portfolios
                 var portfolioInstruments = await _context.PortfolioInstruments.Where(pi => pi.Portfolio.PortfolioID == request.PortfolioID)
                     .ToListAsync(cancellationToken: cancellationToken);
 
-                return new Portfolio
+                var x = new Portfolio
                 {
                     PortfolioID = request.PortfolioID,
-                    Instruments = portfolioInstruments
+                    Instruments = portfolioInstruments,
+                    UserID = portfolioInstruments.First().Portfolio.UserID
+                    //Todo Add here the UserID from auth        
                 };
+                return x;
             }
         }
     }
