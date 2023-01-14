@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using BLL.Core;
+using DAL;
 using DATA.Instruments;
 using DATA.Portfolios;
 using MediatR;
@@ -14,12 +15,12 @@ namespace BLL.MainPortfolio.Portfolios
 {
     public class GetMainPortfolio
     {
-        public class Query : IRequest<Portfolio>
+        public class Query : IRequest<Result<Portfolio>>
         {
             public Guid PortfolioID { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, Portfolio>
+        public class Handler : IRequestHandler<Query, Result<Portfolio>>
         {
             private readonly MainDataContext _context;
 
@@ -27,19 +28,19 @@ namespace BLL.MainPortfolio.Portfolios
             {
                 _context = context;
             }
-            public async Task<Portfolio> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<Portfolio>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var portfolioInstruments = await _context.PortfolioInstruments.Where(pi => pi.Portfolio.PortfolioID == request.PortfolioID)
-                    .ToListAsync(cancellationToken: cancellationToken);
+                var result = await _context.Portfolios.FirstOrDefaultAsync(portfolio =>
+                                   portfolio.PortfolioID == request.PortfolioID, cancellationToken);
 
-                var x = new Portfolio
-                {
-                    PortfolioID = request.PortfolioID,
-                    Instruments = portfolioInstruments,
-                    UserID = portfolioInstruments.First().Portfolio.UserID
-                    //Todo Add here the UserID from auth        
-                };
-                return x;
+                //var portfolio = new Portfolio
+                //{
+                //    PortfolioID = request.PortfolioID,
+                //    Instruments = result.Instruments,
+                //    UserID = result.UserID
+                //    //Todo Add here the UserID from auth        
+                //};
+                return Result<Portfolio>.Success(result);
             }
         }
     }

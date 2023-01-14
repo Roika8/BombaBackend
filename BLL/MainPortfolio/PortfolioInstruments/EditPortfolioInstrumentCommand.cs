@@ -1,18 +1,21 @@
 ﻿using AutoMapper;
+using BLL.MainPortfolio.Validators;
 using DAL;
 using DATA.Instruments;
+using FluentValidation;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BLL.PortfolioInstruments
 {
-    public class EditPortfolioInstrument
+    public class EditPortfolioInstrumentCommand
     {
         public class Command : IRequest
         {
             public PortfolioInstrument PortfolioInstrument { get; set; }
         }
+     
 
         public class Handler : IRequestHandler<Command>
         {

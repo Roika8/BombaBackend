@@ -1,4 +1,6 @@
+using BLL.PortfolioInstruments;
 using BombaRestAPI.Extensions;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using static BLL.PortfolioInstruments.EditPortfolioInstrumentCommand;
 
 namespace BombaRestAPI
 {
@@ -25,11 +29,13 @@ namespace BombaRestAPI
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
-            }).AddNewtonsoftJson(ops =>
+            })
+            .AddNewtonsoftJson(ops =>
             {
                 ops.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
+            services.AddValidationService(_config);
             services.AddIdentityService(_config);
             services.AddApplicationServices(_config);
         }

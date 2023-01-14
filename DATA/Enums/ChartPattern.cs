@@ -8,7 +8,7 @@ namespace DATA.Enums
 {
     public enum ChartPattern
     {
-        Head_And_Shoulders,
+        Head_And_Shoulders = 1,
         Inverse_Head_And_Shoulders,
         Double_Top,
         Double_Bottom,

@@ -1,6 +1,9 @@
 ﻿using BLL.Core;
-
+using BLL.MainPortfolio.Validators;
+using BLL.PortfolioInstruments;
 using DAL;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +34,7 @@ namespace BombaRestAPI.Extensions
             });
 
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
 
             services.AddAutoMapper(typeof(Mapping).Assembly);
 

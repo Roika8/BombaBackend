@@ -1,4 +1,5 @@
-﻿using BLL.MainPortfolio;
+﻿using BLL.Core;
+using BLL.MainPortfolio;
 using BLL.MainPortfolio.Portfolios;
 using BLL.PortfolioInstruments;
 using BombaRestAPI.Controllers;
@@ -28,25 +29,34 @@ namespace BombaAPI.Controllers
         [HttpGet("GetPortfolio/{portfolioID}")]
         public async Task<ActionResult<PortfolioDto>> GetPortfolio(Guid portfolioID, CancellationToken cancellationToken)
         {
-            var portfolio = await Mediator.Send(new GetMainPortfolio.Query { PortfolioID = portfolioID }, cancellationToken);
-            var portfolioInstrumentsDto = new List<PortfolioInstrumentDto>();
-
-            portfolio.Instruments.ToList().ForEach(instrument => portfolioInstrumentsDto.Add(new PortfolioInstrumentDto
+            var result = await Mediator.Send(new GetMainPortfolio.Query { PortfolioID = portfolioID }, cancellationToken);
+            if (result.IsSuccess && result.Value != null)
             {
-                AvgPrice = instrument.AvgPrice,
-                ChartPattern = instrument.ChartPattern,
-                StopLoss = instrument.StopLoss,
-                Symbol = instrument.Symbol,
-                TakeProfit = instrument.TakeProfit,
-                Units = instrument.Units
-            }));
+                var portfolio = result.Value;
+                var portfolioInstrumentsDto = new List<PortfolioInstrumentDto>();
 
-            return new PortfolioDto
+                portfolio.Instruments.ToList().ForEach(instrument => portfolioInstrumentsDto.Add(new PortfolioInstrumentDto
+                {
+                    AvgPrice = instrument.AvgPrice,
+                    ChartPattern = instrument.ChartPattern,
+                    StopLoss = instrument.StopLoss,
+                    Symbol = instrument.Symbol,
+                    TakeProfit = instrument.TakeProfit,
+                    Units = instrument.Units
+                }));
+
+                return Ok(new PortfolioDto
+                {
+                    PortfolioID = portfolioID,
+                    UserID = portfolio.UserID,
+                    PortfolioInstruments = portfolioInstrumentsDto
+                });
+            }
+            if (result.IsSuccess && result.Value == null)
             {
-                PortfolioID = portfolioID,
-                UserID = portfolio.UserID,
-                PortfolioInstruments = portfolioInstrumentsDto
-            };
+                return NotFound();
+            }
+            return BadRequest();
         }
 
         [Route("AddPortfolio")]
@@ -82,13 +92,13 @@ namespace BombaAPI.Controllers
             PortfolioInstrument portfolioInstrument = new()
             {
                 AvgPrice = portfolioInstrumentDto.AvgPrice,
-                ChartPattern = (ChartPattern)portfolioInstrumentDto.ChartPattern,
+                ChartPattern = portfolioInstrumentDto.ChartPattern,
                 StopLoss = portfolioInstrumentDto.StopLoss,
                 TakeProfit = portfolioInstrumentDto.TakeProfit,
                 Units = portfolioInstrumentDto.Units,
                 InstrumentId = instrumentID,
             };
-            var res = await Mediator.Send(new EditPortfolioInstrument.Command { PortfolioInstrument = portfolioInstrument });
+            var res = await Mediator.Send(new EditPortfolioInstrumentCommand.Command { PortfolioInstrument = portfolioInstrument });
             return Ok(res);
         }
 
@@ -113,16 +123,33 @@ namespace BombaAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPortfolioInstrument(Guid portfolioID, PortfolioInstrumentDto portfolioInstrumentDto)
         {
-            PortfolioInstrument portfolioInstrument = new()
+            try
             {
-                AvgPrice = portfolioInstrumentDto.AvgPrice,
-                ChartPattern = (ChartPattern)portfolioInstrumentDto.ChartPattern,
-                StopLoss = portfolioInstrumentDto.StopLoss,
-                Symbol = portfolioInstrumentDto.Symbol,
-                TakeProfit = portfolioInstrumentDto.TakeProfit,
-                Units = portfolioInstrumentDto.Units,
-            };
-            return Ok(await Mediator.Send(new CreatePortfolioInstrument.Command { Instrument = portfolioInstrument, PortfolioId = portfolioID }));
+                PortfolioInstrument portfolioInstrument = new()
+                {
+                    AvgPrice = portfolioInstrumentDto.AvgPrice,
+                    ChartPattern = portfolioInstrumentDto.ChartPattern,
+                    StopLoss = portfolioInstrumentDto.StopLoss,
+                    Symbol = portfolioInstrumentDto.Symbol,
+                    TakeProfit = portfolioInstrumentDto.TakeProfit,
+                    Units = portfolioInstrumentDto.Units,
+                };
+                var result = await Mediator.Send(new CreatePortfolioInstrument.Command { Instrument = portfolioInstrument, PortfolioId = portfolioID });
+                if (result.IsSuccess && result.Value != null)
+                {
+                    return Ok();
+                }
+                if (result.IsSuccess && result.Value == null)
+                {
+                    return NotFound(result.Errors);
+
+                }
+                return BadRequest(result.Errors);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
         }
         #endregion
 

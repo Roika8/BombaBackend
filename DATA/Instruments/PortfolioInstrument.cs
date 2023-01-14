@@ -12,7 +12,7 @@ namespace DATA.Instruments
         public decimal Units { get; set; }
         public decimal? StopLoss { get; set; }
         public decimal? TakeProfit { get; set; }
-        public ChartPattern ChartPattern { get; set; }
+        public int? ChartPattern { get; set; }
 
     }
 }
