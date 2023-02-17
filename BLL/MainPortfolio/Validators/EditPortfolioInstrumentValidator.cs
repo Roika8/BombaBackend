@@ -1,8 +1,6 @@
-﻿using AutoMapper.Execution;
-using DATA.Enums;
+﻿using DATA.Enums;
 using DATA.Instruments;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -20,8 +18,7 @@ namespace BLL.MainPortfolio.Validators
             sb.AppendLine(ValidateChartPattern(model.ChartPattern));
             sb.AppendLine(ValidateAveragePrice(model.AvgPrice));
             sb.AppendLine(ValidateUnits(model.Units));
-            var x = sb.Length;
-            return sb.ToString();
+            return sb.ToString().Trim();
         }
 
         private string ValidateUnits(decimal units)
