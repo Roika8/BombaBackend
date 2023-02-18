@@ -1,6 +1,7 @@
 ﻿using BLL.Core;
 using BLL.MainPortfolio.Validators;
 using DAL;
+using DATA.Enums;
 using DATA.Instruments;
 using DATA.Portfolios;
 using MediatR;
@@ -34,8 +35,8 @@ namespace BLL.PortfolioInstruments
             public async Task<Result<PortfolioInstrument>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var errors = _validator.ValidateCommand(request.Instrument);
-                var x = errors.Length;
-                if (!string.IsNullOrEmpty(errors))
+
+                if (errors.Count > 0)
                 {
                     return Result<PortfolioInstrument>.Failure(errors);
                 }
@@ -43,7 +44,8 @@ namespace BLL.PortfolioInstruments
                 var portfolio = await _context.Portfolios.FindAsync(new object[] { request.PortfolioId }, cancellationToken: cancellationToken);
                 if (portfolio == null)
                 {
-                    return Result<PortfolioInstrument>.Failure("Couldnt find portfolio");
+                    errors.Add(ErrorMessage.PortfolioNotFoundError);
+                    return Result<PortfolioInstrument>.Failure(errors);
                 }
                 var instrument = request.Instrument;
                 instrument.Symbol = instrument.Symbol.ToUpper();
@@ -54,7 +56,8 @@ namespace BLL.PortfolioInstruments
                     await _context.SaveChangesAsync(cancellationToken);
                     return Result<PortfolioInstrument>.Success(request.Instrument);
                 }
-                return Result<PortfolioInstrument>.Failure("InstrumentAlready exists in portfolio");
+                errors.Add(ErrorMessage.InstrumentError);
+                return Result<PortfolioInstrument>.Failure(errors);
             }
             private bool ValidateInstrumentIsNotAlreadyExists(Portfolio portfolio, PortfolioInstrument instrument)
             {

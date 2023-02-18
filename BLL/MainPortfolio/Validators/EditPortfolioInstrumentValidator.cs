@@ -1,45 +1,50 @@
 ﻿using DATA.Enums;
 using DATA.Instruments;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace BLL.MainPortfolio.Validators
 {
     public class EditPortfolioInstrumentValidator : ICommandValidator<PortfolioInstrument>
     {
-        public string ValidateCommand(PortfolioInstrument model)
+        public List<ErrorMessage> ValidateCommand(PortfolioInstrument model)
         {
-            var sb = new StringBuilder();
-
-            sb.AppendLine(ValidateStockSymbol(model.Symbol));
-            sb.AppendLine(ValidateTakeProfit(model.TakeProfit));
-            sb.AppendLine(ValidateStopLoss(model.StopLoss));
-            sb.AppendLine(ValidateChartPattern(model.ChartPattern));
-            sb.AppendLine(ValidateAveragePrice(model.AvgPrice));
-            sb.AppendLine(ValidateUnits(model.Units));
-            return sb.ToString().Trim();
+            var errorsList = new List<ErrorMessage>
+            {
+                ValidateStockSymbol(model.Symbol),
+                ValidateTakeProfit(model.TakeProfit),
+                ValidateStopLoss(model.StopLoss),
+                ValidateChartPattern(model.ChartPattern),
+                ValidateAveragePrice(model.AvgPrice),
+                ValidateUnits(model.Units)
+            };
+            return errorsList;
         }
 
-        private string ValidateUnits(decimal units)
+        private ErrorMessage ValidateUnits(decimal units)
         {
             if (units < 1)
             {
-                return "Units cannot be less then 1";
+                return ErrorMessage.UnitsError;
             }
-            return string.Empty;
+            return ErrorMessage.NoErrors;
         }
 
-        private string ValidateAveragePrice(decimal avgPrice)
+        private ErrorMessage ValidateAveragePrice(decimal avgPrice)
         {
             if (avgPrice < 0)
             {
-                return "Average Price cannot be less then 0";
+                return ErrorMessage.AveragePriceError;
             }
-            return string.Empty;
+            return ErrorMessage.NoErrors;
         }
 
-        private string ValidateChartPattern(int? chartPattern)
+        private ErrorMessage ValidateChartPattern(int? chartPattern)
         {
             int minValue = (int)Enum.GetValues(typeof(ChartPattern)).Cast<ChartPattern>().Min();
             int maxValue = (int)Enum.GetValues(typeof(ChartPattern)).Cast<ChartPattern>().Max();
@@ -48,44 +53,51 @@ namespace BLL.MainPortfolio.Validators
             {
                 if (!Enum.IsDefined(typeof(ChartPattern), chartPattern))
                 {
-                    return $"Invalid chartPattern entered, The range is {minValue} - {maxValue}, the requested value was: {chartPattern}";
+                    //todo im here fix this 
+                    //var descriptionAttribute = new DescriptionAttribute($"Invalid chartPattern entered, The range is {minValue} - {maxValue}, the requested value was: {chartPattern}");
+                    //var type = ErrorMessage.ChartPatternError.GetType();
+                    //FieldInfo fieldInfo = type.GetField(ErrorMessage.ChartPatternError.ToString());
+                    //fieldInfo.SetValue(ErrorMessage.ChartPatternError, descriptionAttribute);
+
+                    return ErrorMessage.ChartPatternError;
+                    //return $"Invalid chartPattern entered, The range is {minValue} - {maxValue}, the requested value was: {chartPattern}";
                 }
             }
-            return string.Empty;
+            return ErrorMessage.NoErrors;
         }
-        private string ValidateStopLoss(decimal? stopLoss)
+        private ErrorMessage ValidateStopLoss(decimal? stopLoss)
         {
             if (stopLoss < 0)
             {
-                return "StopLoss cannot be less then 0";
+                return ErrorMessage.StopLossError;
             }
-            return string.Empty;
+            return ErrorMessage.NoErrors;
         }
 
-        private string ValidateTakeProfit(decimal? takeProfit)
+        private ErrorMessage ValidateTakeProfit(decimal? takeProfit)
         {
             if (takeProfit < 0)
             {
-                return "TakeProfit cannot be less then 0";
+                return ErrorMessage.TakeProfitError;
             }
-            return string.Empty;
+            return ErrorMessage.NoErrors;
         }
 
-        private string ValidateStockSymbol(string symbol)
+        private ErrorMessage ValidateStockSymbol(string symbol)
         {
             if (string.IsNullOrEmpty(symbol))
             {
-                return "Instrument symbol is required.";
+                return ErrorMessage.SymbolError;
             }
             if (symbol.Length > 4)
             {
-                return "Symbol cannot be more then 4 digits long";
+                return ErrorMessage.SymboLengthError;
             }
             if (string.IsNullOrWhiteSpace(symbol))
             {
-                return "Symbol cannot have white spaces";
+                return ErrorMessage.SymbolFormatError;
             }
-            return string.Empty;
+            return ErrorMessage.NoErrors;
         }
     }
 }

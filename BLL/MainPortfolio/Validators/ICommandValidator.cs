@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using DATA.Enums;
+using System.Collections.Generic;
 
 namespace BLL.MainPortfolio.Validators
 {
     public interface ICommandValidator<T>
     {
-        string ValidateCommand(T model);
-
+        List<ErrorMessage> ValidateCommand(T model);
     }
 }
