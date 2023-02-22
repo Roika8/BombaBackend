@@ -8,8 +8,10 @@ using BombaRestAPI.Properties.DTOs.PortfoliosDtos;
 using DATA.Enums;
 using DATA.Instruments;
 using DATA.Portfolios;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,11 @@ namespace BombaAPI.Controllers
     [Route("api/[controller]")]
     public class MainPortfolioController : BaseApiController
     {
+        private IMediator _mediator;
+        public MainPortfolioController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         #region Portfolio
 
@@ -134,7 +141,7 @@ namespace BombaAPI.Controllers
                     TakeProfit = portfolioInstrumentDto.TakeProfit,
                     Units = portfolioInstrumentDto.Units,
                 };
-                var result = await Mediator.Send(new CreatePortfolioInstrument.Command { Instrument = portfolioInstrument, PortfolioId = portfolioID });
+                var result = await _mediator.Send(new CreatePortfolioInstrument.Command { Instrument = portfolioInstrument, PortfolioId = portfolioID });
                 if (result.IsSuccess && result.Value != null)
                 {
                     return Ok();
@@ -142,7 +149,6 @@ namespace BombaAPI.Controllers
                 if (result.IsSuccess && result.Value == null)
                 {
                     return NotFound(result.Errors);
-
                 }
                 return BadRequest(result.Errors);
             }
@@ -151,6 +157,7 @@ namespace BombaAPI.Controllers
                 return BadRequest(ex.ToString());
             }
         }
+
         #endregion
 
     }

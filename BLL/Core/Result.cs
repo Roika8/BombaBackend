@@ -1,4 +1,5 @@
-﻿using DATA.Enums;
+﻿using BLL.Services;
+using DATA.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,16 @@ namespace BLL.Core
     {
         public bool IsSuccess { get; set; }
         public T Value { get; set; }
-        public List<ErrorMessage> Errors { get; set; }
+        public List<string> Errors { get; set; }
         public static Result<T> Success(T value)
         {
             return new Result<T> { Value = value, IsSuccess = true };
         }
         public static Result<T> Failure(List<ErrorMessage> errors)
         {
-            return new Result<T> { Errors = errors, IsSuccess = false };
+            var errorsDescription = ErrorConvertor.ConvertErrorsList(errors);
+            return new Result<T> { Errors = errorsDescription, IsSuccess = false };
         }
+       
     }
 }

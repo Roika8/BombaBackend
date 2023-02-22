@@ -23,6 +23,7 @@ namespace BLL.MainPortfolio.Validators
                 ValidateAveragePrice(model.AvgPrice),
                 ValidateUnits(model.Units)
             };
+            errorsList.RemoveAll(err => err == ErrorMessage.NoErrors);
             return errorsList;
         }
 
@@ -46,21 +47,11 @@ namespace BLL.MainPortfolio.Validators
 
         private ErrorMessage ValidateChartPattern(int? chartPattern)
         {
-            int minValue = (int)Enum.GetValues(typeof(ChartPattern)).Cast<ChartPattern>().Min();
-            int maxValue = (int)Enum.GetValues(typeof(ChartPattern)).Cast<ChartPattern>().Max();
-
             if (chartPattern != null)
             {
                 if (!Enum.IsDefined(typeof(ChartPattern), chartPattern))
                 {
-                    //todo im here fix this 
-                    //var descriptionAttribute = new DescriptionAttribute($"Invalid chartPattern entered, The range is {minValue} - {maxValue}, the requested value was: {chartPattern}");
-                    //var type = ErrorMessage.ChartPatternError.GetType();
-                    //FieldInfo fieldInfo = type.GetField(ErrorMessage.ChartPatternError.ToString());
-                    //fieldInfo.SetValue(ErrorMessage.ChartPatternError, descriptionAttribute);
-
                     return ErrorMessage.ChartPatternError;
-                    //return $"Invalid chartPattern entered, The range is {minValue} - {maxValue}, the requested value was: {chartPattern}";
                 }
             }
             return ErrorMessage.NoErrors;

@@ -1,5 +1,6 @@
 ﻿using BLL.Core;
 using BLL.MainPortfolio.Validators;
+using BLL.Services;
 using DAL;
 using DATA.Enums;
 using DATA.Instruments;
@@ -64,6 +65,7 @@ namespace BLL.PortfolioInstruments
                 var portfolioInstrumentsList = portfolio.Instruments.ToList();
                 return portfolioInstrumentsList.Find(ins => ins.Symbol == instrument.Symbol) == null;
             }
+
         }
     }
 }

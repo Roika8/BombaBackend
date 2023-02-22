@@ -14,7 +14,7 @@ namespace DATA.Enums
         [Description("Average Price cannot be less then 0")]
         AveragePriceError,
 
-        [Description("Invalid chartPattern entered")]
+        [Description("ChartPattern out of range")]
         ChartPatternError,
 
         [Description("StopLoss cannot be less then 0")]
