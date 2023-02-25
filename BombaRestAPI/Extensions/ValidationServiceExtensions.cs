@@ -10,6 +10,7 @@ namespace BombaRestAPI.Extensions
         public static IServiceCollection AddValidationService(this IServiceCollection services, IConfiguration config)
         {
             services.AddSingleton<ICommandValidator<PortfolioInstrument>, EditPortfolioInstrumentValidator>();
+            //todo add more validators init
             return services;
         }
     }

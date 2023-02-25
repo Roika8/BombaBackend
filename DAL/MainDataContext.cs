@@ -1,10 +1,6 @@
 ﻿using DATA;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Diagnostics.CodeAnalysis;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using System.Reflection.Emit;
 using DATA.Portfolios;
 using DATA.Instruments;
 
@@ -17,7 +13,7 @@ namespace DAL
 
         }
 
-
+     
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
