@@ -7,6 +7,7 @@ using BombaRestAPI.Properties.DTOs;
 using DAL;
 using DATA.Enums;
 using DATA.Instruments;
+using DATA.Portfolios;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,8 +17,10 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace UnitTests
 {
@@ -29,12 +32,26 @@ namespace UnitTests
         {
             DbContextOptionsBuilder dbOptions = new DbContextOptionsBuilder<MainDataContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
             _dbContext = new MainDataContext((DbContextOptions<MainDataContext>)dbOptions.Options);
-            _validator = new EditPortfolioInstrumentValidator();
+            _validator = new AddPortfolioInstrumentValidator();
+        }
+
+        // Define a factory method to create a new DbSet<Portfolio>
+        private DbSet<T> CreateDbSet<T>(List<T> data) where T : class
+        {
+            var queryableData = data.AsQueryable();
+            var mockDbSet = new Mock<DbSet<T>>();
+            mockDbSet.As<IQueryable<T>>().Setup(m => m.Provider).Returns(queryableData.Provider);
+            mockDbSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(queryableData.Expression);
+            mockDbSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(queryableData.ElementType);
+            mockDbSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(() => queryableData.GetEnumerator());
+
+
+            return mockDbSet.Object;
         }
 
         [Test]
-        public async Task AddingNewPortfolioInstrument_InvalidArgument_GetErrorsList([Values] bool validAveragePrice, [Values] bool validSymbol, [Values] bool validUnits,
-            [Values] bool validStopLoss, [Values] bool validTakeProfit, [Values] bool validChartPattern)
+        public async Task AddingNewPortfolioInstrument_InvalidArgument_GetErrorsList([Values] bool validAveragePrice, [Values] bool validSymbol,
+            [Values] bool validUnits, [Values] bool validStopLoss, [Values] bool validTakeProfit, [Values] bool validChartPattern)
         {
             // Arrange
             var portfolioInstrument = new PortfolioInstrument
@@ -46,57 +63,196 @@ namespace UnitTests
                 Symbol = validSymbol ? "SMBL" : "TooLongSymbol",
                 Units = validUnits ? 3 : -1
             };
-            var errorsList = new List<ErrorMessage>();
-
-
-            if (!validAveragePrice)
-            {
-                errorsList.Add(ErrorMessage.AveragePriceError);
-            }
-            if (!validSymbol)
-            {
-                errorsList.Add(ErrorMessage.SymbolError);
-            }
-            if (!validUnits)
-            {
-                errorsList.Add(ErrorMessage.UnitsError);
-            }
-            if (!validStopLoss)
-            {
-                errorsList.Add(ErrorMessage.StopLossError);
-            }
-            if (!validTakeProfit)
-            {
-                errorsList.Add(ErrorMessage.ChartPatternError);
-            }
-            if (!validChartPattern)
-            {
-                errorsList.Add(ErrorMessage.ChartPatternError);
-            }
-
-            //var expectedCommandResult = Result<PortfolioInstrument>.Failure(errorsList);
-            //var mediatorMock = new Mock<IMediator>();
-
-            //mediatorMock.Setup(m => m.Send(It.IsAny<CreatePortfolioInstrument.Command>(), default)).
-            //    ReturnsAsync(expectedCommandResult);
-
-            //var portfolioController = new MainPortfolioController(mediatorMock.Object);
 
             var command = new CreatePortfolioInstrument.Command { PortfolioId = Guid.NewGuid(), Instrument = portfolioInstrument };
             var handler = new CreatePortfolioInstrument.Handler(_dbContext, _validator);
             var result = await handler.Handle(command, CancellationToken.None);
 
-            // Act
-            //var result = await portfolioController.AddPortfolioInstrument(Guid.NewGuid(), portfolioInstrumentDto);
+            Assert.Multiple(() =>
+            {
 
-            //// Assert
-            //Assert.IsInstanceOf<BadRequestResult>(result);
-            //var contentResult = result as ContentResult;
+                if (validAveragePrice)
+                {
+                    Assert.That(result.Errors, Does.Not.Contain(ErrorConvertor.ConvertError(ErrorMessage.AveragePriceError)));
+                }
+                else
+                {
+                    Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.AveragePriceError)));
+                }
+                if (validSymbol)
+                {
+                    Assert.That(result.Errors, Does.Not.Contain(ErrorConvertor.ConvertError(ErrorMessage.SymboLengthError)));
+                    Assert.That(result.Errors, Does.Not.Contain(ErrorConvertor.ConvertError(ErrorMessage.SymbolEmptyError)));
+                    Assert.That(result.Errors, Does.Not.Contain(ErrorConvertor.ConvertError(ErrorMessage.SymbolFormatError)));
+                }
+                else
+                {
+                    Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.SymboLengthError)));
+                }
+                if (validUnits)
+                {
+                    Assert.That(result.Errors, Does.Not.Contain(ErrorConvertor.ConvertError(ErrorMessage.UnitsError)));
+                }
+                else
+                {
+                    Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.UnitsError)));
+                }
+                if (validStopLoss)
+                {
+                    Assert.That(result.Errors, Does.Not.Contain(ErrorConvertor.ConvertError(ErrorMessage.StopLossError)));
+                }
+                else
+                {
+                    Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.StopLossError)));
+                }
+                if (validTakeProfit)
+                {
+                    Assert.That(result.Errors, Does.Not.Contain(ErrorConvertor.ConvertError(ErrorMessage.TakeProfitError)));
+                }
+                else
+                {
+                    Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.TakeProfitError)));
+                }
+                if (validChartPattern)
+                {
+                    Assert.That(result.Errors, Does.Not.Contain(ErrorConvertor.ConvertError(ErrorMessage.ChartPatternError)));
+                }
+                else
+                {
+                    Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.ChartPatternError)));
+                }
 
-            //if (!validAveragePrice)
-            //{
-            //    StringAssert.Contains(ErrorConvertor.ConvertError(ErrorMessage.AveragePriceError), contentResult.Content, "Average price error not found");
-            //}
+            });
+        }
+        [Test]
+        [TestCase("")]
+        [TestCase(" ")]
+        [TestCase("EG#")]
+        [TestCase("EGEG#")]
+        [TestCase("EGGEEG")]
+        [TestCase("EG G")]
+
+        public async Task AddingNewPortfolioInstrument_InvalidSymbol_GetErrorsList(string testedSymbol)
+        {
+            //Arrange
+            var portfolioInstrument = new PortfolioInstrument
+            {
+                AvgPrice = 10,
+                ChartPattern = (int)ChartPattern.Flag,
+                StopLoss = 10,
+                TakeProfit = 10,
+                Symbol = testedSymbol,
+                Units = 3
+            };
+
+            //Action
+            var command = new CreatePortfolioInstrument.Command { PortfolioId = Guid.NewGuid(), Instrument = portfolioInstrument };
+            var handler = new CreatePortfolioInstrument.Handler(_dbContext, _validator);
+            var result = await handler.Handle(command, CancellationToken.None);
+
+            //Assert
+            if (string.IsNullOrEmpty(testedSymbol))
+            {
+                Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.SymbolEmptyError)));
+            }
+            else if (testedSymbol.Count() > 4)
+            {
+                Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.SymboLengthError)));
+            }
+            else
+            {
+                Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.SymbolFormatError)));
+            }
+
+        }
+
+        [Test]
+        public async Task AddingNewPortfolioInstrument_PortfolioNotExists_PortfolioNotFoundError()
+        {
+            //Arrange
+            var portfolioInstrument = new PortfolioInstrument
+            {
+                AvgPrice = 10,
+                ChartPattern = (int)ChartPattern.Flag,
+                StopLoss = 10,
+                TakeProfit = 10,
+                Symbol = "TSLA",
+                Units = 30
+            };
+            var portfolioId = Guid.NewGuid();
+            var portfolioList = new List<Portfolio>()
+            {
+                new Portfolio
+                {
+                  PortfolioID = portfolioId,
+                  Instruments = new List<PortfolioInstrument>
+                  {
+                    portfolioInstrument
+                  }
+                }
+            };
+            _dbContext.Portfolios.AddRange(CreateDbSet(portfolioList));
+
+
+            var command = new CreatePortfolioInstrument.Command { PortfolioId = Guid.NewGuid(), Instrument = portfolioInstrument };
+            var handler = new CreatePortfolioInstrument.Handler(_dbContext, _validator);
+
+            //Action
+            var result = await handler.Handle(command, CancellationToken.None);
+
+            //Assert
+            Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.PortfolioNotFoundError)));
+        }
+
+        [Test]
+        public async Task AddingNewPortfolioInstrument_InstrumentSymbolAlreadyExists_InstrumentExistsError()
+        {
+            //Arrange
+            var requestedPortfolioInstrument = new PortfolioInstrument
+            {
+                AvgPrice = 10,
+                ChartPattern = (int)ChartPattern.Flag,
+                StopLoss = 10,
+                TakeProfit = 10,
+                Symbol = "TSLA",
+                Units = 30
+            };
+
+            var existsPortfolioInstrument = new PortfolioInstrument
+            {
+                AvgPrice = 7,
+                ChartPattern = (int)ChartPattern.Pennant,
+                StopLoss = 6,
+                TakeProfit = 10,
+                Symbol = "TSLA",
+                Units = 500
+            };
+
+
+            var portfolioId = Guid.NewGuid();
+            var portfolioList = new List<Portfolio>()
+            {
+                new Portfolio
+                {
+                  PortfolioID = portfolioId,
+                  Instruments = new List<PortfolioInstrument>
+                  {
+                    existsPortfolioInstrument
+                  }
+                }
+            };
+
+            _dbContext.Portfolios.AddRange(CreateDbSet(portfolioList));
+
+
+            var command = new CreatePortfolioInstrument.Command { PortfolioId = portfolioId, Instrument = requestedPortfolioInstrument };
+            var handler = new CreatePortfolioInstrument.Handler(_dbContext, _validator);
+
+            //Action
+            var result = await handler.Handle(command, CancellationToken.None);
+
+            //Assert
+            Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.InstrumentExistsError)));
         }
     }
 }

@@ -54,12 +54,14 @@ namespace BLL.PortfolioInstruments
 
                 if (ValidateInstrumentIsNotAlreadyExists(portfolio, instrument))
                 {
+                    portfolio.Instruments.Add(instrument);
                     await _context.SaveChangesAsync(cancellationToken);
                     return Result<PortfolioInstrument>.Success(request.Instrument);
                 }
-                errors.Add(ErrorMessage.InstrumentError);
+                errors.Add(ErrorMessage.InstrumentExistsError);
                 return Result<PortfolioInstrument>.Failure(errors);
             }
+
             private bool ValidateInstrumentIsNotAlreadyExists(Portfolio portfolio, PortfolioInstrument instrument)
             {
                 var portfolioInstrumentsList = portfolio.Instruments.ToList();

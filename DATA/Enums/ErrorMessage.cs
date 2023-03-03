@@ -24,20 +24,21 @@ namespace DATA.Enums
         TakeProfitError,
 
         [Description("Instrument symbol is required")]
-        SymbolError,
+        SymbolEmptyError,
 
-        [Description("Symbol cannot be more then 4 digits long0")]
+        [Description("Symbol cannot be more then 4 digits long")]
         SymboLengthError,
 
-        [Description("Symbol cannot have white spaces")]
+        [Description("Symbol cannot have white spaces and must contains letters only")]
         SymbolFormatError,
 
         [Description("Couldnt find portfolio")]
         PortfolioNotFoundError,
 
-        [Description("InstrumentAlready exists in portfolio")]
-        InstrumentError,
+        [Description("Instrument Already exists in portfolio")]
+        InstrumentExistsError,
 
-
+        [Description("Instrument not found in portfolio")]
+        InstrumentNotFoundError,
     }
 }

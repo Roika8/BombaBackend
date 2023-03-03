@@ -1,16 +1,12 @@
 ﻿using DATA.Enums;
 using DATA.Instruments;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BLL.MainPortfolio.Validators
 {
-    public class EditPortfolioInstrumentValidator : ICommandValidator<PortfolioInstrument>
+    public class AddPortfolioInstrumentValidator : ICommandValidator<PortfolioInstrument>
     {
         public List<ErrorMessage> ValidateCommand(PortfolioInstrument model)
         {
@@ -78,13 +74,13 @@ namespace BLL.MainPortfolio.Validators
         {
             if (string.IsNullOrEmpty(symbol))
             {
-                return ErrorMessage.SymbolError;
+                return ErrorMessage.SymbolEmptyError;
             }
             if (symbol.Length > 4)
             {
                 return ErrorMessage.SymboLengthError;
             }
-            if (string.IsNullOrWhiteSpace(symbol))
+            if (string.IsNullOrWhiteSpace(symbol) || !Regex.IsMatch(symbol, "^[a-zA-Z]*$"))
             {
                 return ErrorMessage.SymbolFormatError;
             }

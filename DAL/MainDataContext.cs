@@ -12,8 +12,12 @@ namespace DAL
         {
 
         }
+        public MainDataContext()
+        {
 
-     
+        }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
@@ -22,7 +26,7 @@ namespace DAL
                  .WithMany(hp => hp.Instruments)
                  .HasForeignKey(hi => hi.PortfolioId);
 
-          
+
             builder.Entity<PortfolioInstrument>()
                  .HasOne(h => h.Portfolio)
                  .WithMany(hp => hp.Instruments)
@@ -42,7 +46,7 @@ namespace DAL
             base.OnModelCreating(builder);
 
         }
-        public DbSet<Portfolio> Portfolios { get; set; }
+        public virtual DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<PortfolioInstrument> PortfolioInstruments { get; set; }
         public DbSet<CashData> CashDatas { get; set; }
 

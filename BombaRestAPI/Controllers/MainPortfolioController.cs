@@ -83,8 +83,18 @@ namespace BombaAPI.Controllers
         {
             try
             {
-                var res = await Mediator.Send(new DeletePortfolioInstrument.Command { InstrumentID = instrumentID });
-                return Ok(res);
+                var result = await Mediator.Send(new DeletePortfolioInstrument.Command { InstrumentID = instrumentID });
+
+                if (result.IsSuccess)
+                {
+                    return Ok();
+                }
+
+                if (!result.IsSuccess)
+                {
+                    return NotFound(result.Errors);
+                }
+                return BadRequest(result.Errors);
             }
             catch (Exception e)
             {
