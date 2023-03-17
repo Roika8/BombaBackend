@@ -25,12 +25,12 @@ namespace BombaRestAPI.Controllers
         private readonly TokenService _tokenService;
         private readonly UserManager<User> _userMananger;
 
-        public UsersController(ILogger<UsersController> logger, UserManager<User> userManager, SignInManager<User> signInManager, TokenService tokenService)
+        public UsersController(ILogger<UsersController> logger,  SignInManager<User> signInManager, TokenService tokenService)
         {
             _logger = logger;
             _signInManager = signInManager;
             _tokenService = tokenService;
-            _userMananger = userManager;
+            _userMananger = signInManager.UserManager;
         }
 
         private UserDto CreateUserDtoObject(User user)
@@ -90,11 +90,9 @@ namespace BombaRestAPI.Controllers
         [Authorize]
         [HttpGet("GetCurrentUser")]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
-        {//Im stuck in here!
-
+        {
             try
             {
-                //The 'User' object is set because the "UserManager" already set this field
                 var foundUser = await _userMananger.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
                 return CreateUserDtoObject(foundUser);
 

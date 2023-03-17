@@ -20,7 +20,6 @@ using System.Threading.Tasks;
 
 namespace BombaAPI.Controllers
 {
-    [AllowAnonymous] //Change it after
     [ApiController]
     [Route("api/[controller]")]
     public class MainPortfolioController : BaseApiController

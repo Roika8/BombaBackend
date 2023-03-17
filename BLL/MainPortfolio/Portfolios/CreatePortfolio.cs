@@ -16,7 +16,7 @@ namespace BLL.MainPortfolio
         {
             private readonly MainDataContext _context;
 
-            public Handler(MainDataContext context)
+            public Handler(MainDataContext context,)
             {
                 _context = context;
             }
