@@ -1,7 +1,11 @@
-﻿using BLL.Services;
+﻿using BLL.HistorytPortfolio.Portfolios;
+using BLL.MainPortfolio;
+using BLL.Services;
+using BLL.TrackingPortfolioHandler.Portfolios;
 using BombaRestAPI.DTO;
 using BombaRestAPI.DTOs;
 using DATA;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,14 +22,14 @@ namespace BombaRestAPI.Controllers
     [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseApiController
     {
         readonly ILogger<UsersController> _logger;
         private readonly SignInManager<User> _signInManager;
         private readonly TokenService _tokenService;
         private readonly UserManager<User> _userMananger;
 
-        public UsersController(ILogger<UsersController> logger,  SignInManager<User> signInManager, TokenService tokenService)
+        public UsersController(ILogger<UsersController> logger, SignInManager<User> signInManager, TokenService tokenService)
         {
             _logger = logger;
             _signInManager = signInManager;
@@ -70,6 +74,10 @@ namespace BombaRestAPI.Controllers
                 var result = await _userMananger.CreateAsync(user, registerDto.Password);
                 if (result.Succeeded)
                 {
+                    await Mediator.Send(new CreatePortfolio.Command { UserID = user.Id });
+                    await Mediator.Send(new CreateHistoryPortfolio.Command { UserID = user.Id });
+                    await Mediator.Send(new CreateTrackingPortfolio.Command { UserID = user.Id });
+
                     return CreateUserDtoObject(user);
                 }
                 else

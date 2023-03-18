@@ -13,6 +13,7 @@ namespace BLL.HistorytPortfolio.Portfolios
     {
         public class Command : IRequest
         {
+            public string UserID { get; set; }
 
         }
         public class Handler : IRequestHandler<Command>
@@ -28,7 +29,8 @@ namespace BLL.HistorytPortfolio.Portfolios
                 HistoryPortfolio portfolio = new()
                 {
                     Instruments = new List<HistoryInstrument>(),
-                    UserID = Guid.NewGuid()
+                    UserID = Guid.Parse(request.UserID),
+                    PortfolioID = Guid.NewGuid()
                 };
                 _context.HistoryPortfolios.Add(portfolio);
                 await _context.SaveChangesAsync(cancellationToken);

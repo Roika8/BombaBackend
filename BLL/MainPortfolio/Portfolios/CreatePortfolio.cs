@@ -11,12 +11,15 @@ namespace BLL.MainPortfolio
 {
     public class CreatePortfolio
     {
-        public class Command : IRequest { }
+        public class Command : IRequest
+        {
+            public string UserID { get; set; }
+        }
         public class Handler : IRequestHandler<Command>
         {
             private readonly MainDataContext _context;
 
-            public Handler(MainDataContext context,)
+            public Handler(MainDataContext context)
             {
                 _context = context;
             }
@@ -25,8 +28,7 @@ namespace BLL.MainPortfolio
                 var portfolio = new Portfolio
                 {
                     Instruments = new List<PortfolioInstrument>(),
-                    //Todo change the UserID to the auth user
-                    UserID = Guid.NewGuid(),
+                    UserID = Guid.Parse(request.UserID),
                     PortfolioID = Guid.NewGuid()
                 };
                 _context.Portfolios.Add(portfolio);

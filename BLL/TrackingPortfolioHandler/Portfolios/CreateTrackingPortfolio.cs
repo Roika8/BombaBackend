@@ -13,8 +13,8 @@ namespace BLL.TrackingPortfolioHandler.Portfolios
     {
         public class Command : IRequest
         {
-
-        }
+            public string UserID { get; set; }
+                    }
         public class Handler : IRequestHandler<Command>
         {
             private readonly MainDataContext _context;
@@ -28,7 +28,8 @@ namespace BLL.TrackingPortfolioHandler.Portfolios
                 TrackingPortfolio portfolio = new()
                 {
                     Instruments = new List<TrackingInstrument>(),
-                    UserID = Guid.NewGuid()
+                    UserID = Guid.Parse(request.UserID),
+                    PortfolioID = Guid.NewGuid()
                 };
                 _context.TrackingPortfolios.Add(portfolio);
                 await _context.SaveChangesAsync(cancellationToken);
