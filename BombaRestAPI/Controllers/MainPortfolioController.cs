@@ -84,11 +84,11 @@ namespace BombaAPI.Controllers
         #region Instruments in portfolio
 
         [HttpDelete("DeleteInstrument/{instrumentID}")]
-        public async Task<ActionResult<PortfolioInstrument>> DeletePortfolioInstrument(int instrumentID)
+        public async Task<ActionResult<PortfolioInstrument>> DeletePortfolioInstrument(int instrumentID, CancellationToken cancellationToken = default(CancellationToken))
         {
             try
             {
-                var result = await Mediator.Send(new DeletePortfolioInstrument.Command { InstrumentID = instrumentID });
+                var result = await Mediator.Send(new DeletePortfolioInstrument.Command { InstrumentID = instrumentID }, cancellationToken);
 
                 if (result.IsSuccess)
                 {
@@ -143,7 +143,7 @@ namespace BombaAPI.Controllers
 
         [Route("AddInstrumentToPortfolio")]
         [HttpPost]
-        public async Task<IActionResult> AddPortfolioInstrument(Guid portfolioID, PortfolioInstrumentDto portfolioInstrumentDto)
+        public async Task<IActionResult> AddPortfolioInstrument(Guid portfolioID, PortfolioInstrumentDto portfolioInstrumentDto, CancellationToken cancellationToke = default(CancellationToken))
         {
             try
             {
@@ -156,7 +156,7 @@ namespace BombaAPI.Controllers
                     TakeProfit = portfolioInstrumentDto.TakeProfit,
                     Units = portfolioInstrumentDto.Units,
                 };
-                var result = await Mediator.Send(new CreatePortfolioInstrument.Command { Instrument = portfolioInstrument, PortfolioId = portfolioID });
+                var result = await Mediator.Send(new CreatePortfolioInstrument.Command { Instrument = portfolioInstrument, PortfolioId = portfolioID }, cancellationToke);
                 if (result.IsSuccess && result.Value != null)
                 {
                     return Ok();

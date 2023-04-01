@@ -26,7 +26,7 @@ namespace BombaRestAPI
                 var context = services.GetRequiredService<UserDataContext>();
                 var userManager = services.GetRequiredService<UserManager<User>>();
                 await context.Database.MigrateAsync();
-                await Seeder.SeedUsers(context, userManager);
+                //await Seeder.SeedUsers(context, userManager);
             }
             catch (Exception e)
             {

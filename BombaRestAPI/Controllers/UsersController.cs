@@ -5,7 +5,6 @@ using BLL.TrackingPortfolioHandler.Portfolios;
 using BombaRestAPI.DTO;
 using BombaRestAPI.DTOs;
 using DATA;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
