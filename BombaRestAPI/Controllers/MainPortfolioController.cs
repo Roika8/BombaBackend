@@ -84,7 +84,7 @@ namespace BombaAPI.Controllers
         #region Instruments in portfolio
 
         [HttpDelete("DeleteInstrument/{instrumentID}")]
-        public async Task<ActionResult<PortfolioInstrument>> DeletePortfolioInstrument(int instrumentID, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<ActionResult<PortfolioInstrument>> DeletePortfolioInstrument(int instrumentID, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace BombaAPI.Controllers
 
         [Route("AddInstrumentToPortfolio")]
         [HttpPost]
-        public async Task<IActionResult> AddPortfolioInstrument(Guid portfolioID, PortfolioInstrumentDto portfolioInstrumentDto, CancellationToken cancellationToke = default(CancellationToken))
+        public async Task<IActionResult> AddPortfolioInstrument(Guid portfolioID, PortfolioInstrumentDto portfolioInstrumentDto, CancellationToken cancellationToke = default)
         {
             try
             {

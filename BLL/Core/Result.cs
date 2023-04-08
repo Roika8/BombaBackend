@@ -23,6 +23,10 @@ namespace BLL.Core
             var errorsDescription = ErrorConvertor.ConvertErrorsList(errors);
             return new Result<T> { Errors = errorsDescription, IsSuccess = false };
         }
-       
+        public static Result<T> Failure(ErrorMessage error)
+        {
+            var errorDescription = ErrorConvertor.ConvertError(error);
+            return new Result<T> { Errors = new List<string> { errorDescription }, IsSuccess = false };
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BLL.Core;
+using BLL.MainPortfolio.Validators;
 using DAL;
 using DATA.Enums;
 using DATA.Instruments;
@@ -29,10 +30,15 @@ namespace BLL.PortfolioInstruments
 
                 if (portfolioInstrument == null)
                 {
-                    return Result<Unit>.Failure(new List<ErrorMessage> { ErrorMessage.InstrumentNotFoundError });
+                    return Result<Unit>.Failure(ErrorMessage.InstrumentNotFoundError);
                 }
                 _context.Remove(portfolioInstrument);
-                await _context.SaveChangesAsync(cancellationToken);
+                var result = await _context.SaveChangesAsync(cancellationToken) > 0;
+                if (!result)
+                {
+                    return Result<Unit>.Failure(ErrorMessage.DatabaseDeleteRecordError);
+                }
+
                 return Result<Unit>.Success(Unit.Value);
             }
 

@@ -40,5 +40,14 @@ namespace DATA.Enums
 
         [Description("Instrument not found in portfolio")]
         InstrumentNotFoundError,
+
+        [Description("Failed to add record from DB")]
+        DatabaseAddRecordError,
+
+        [Description("Failed to delete record from DB")]
+        DatabaseDeleteRecordError,
+
+        [Description("Failed to edit record from DB")]
+        DatabaseEditRecordError,
     }
 }

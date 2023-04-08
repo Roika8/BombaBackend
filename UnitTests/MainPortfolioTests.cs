@@ -24,30 +24,11 @@ using System.Xml;
 
 namespace UnitTests
 {
-    public class Tests
+    public class MainPortfolioTests : BaseTests
     {
-        private MainDataContext _dbContext;
-        private ICommandValidator<PortfolioInstrument> _validator;
-        public Tests()
-        {
-            DbContextOptionsBuilder dbOptions = new DbContextOptionsBuilder<MainDataContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
-            _dbContext = new MainDataContext((DbContextOptions<MainDataContext>)dbOptions.Options);
-            _validator = new AddPortfolioInstrumentValidator();
-        }
 
-        // Define a factory method to create a new DbSet<Portfolio>
-        private DbSet<T> CreateDbSet<T>(List<T> data) where T : class
-        {
-            var queryableData = data.AsQueryable();
-            var mockDbSet = new Mock<DbSet<T>>();
-            mockDbSet.As<IQueryable<T>>().Setup(m => m.Provider).Returns(queryableData.Provider);
-            mockDbSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(queryableData.Expression);
-            mockDbSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(queryableData.ElementType);
-            mockDbSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(() => queryableData.GetEnumerator());
+        #region Add instrument 
 
-
-            return mockDbSet.Object;
-        }
 
         [Test]
         public async Task AddingNewPortfolioInstrument_InvalidArgument_GetErrorsList([Values] bool validAveragePrice, [Values] bool validSymbol,
@@ -124,6 +105,9 @@ namespace UnitTests
 
             });
         }
+
+
+
         [Test]
         [TestCase("")]
         [TestCase(" ")]
@@ -254,5 +238,88 @@ namespace UnitTests
             //Assert
             Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.InstrumentExistsError)));
         }
+        #endregion
+
+        #region Delete instrument 
+        [Test]
+        public async Task DeletePortfolioInstrument_InstrumentIdExists_InstrumentRemoved()
+        {
+            //Arrange
+            const int instrumentID = 12345;
+            var portfolioInstrument = new PortfolioInstrument
+            {
+                AvgPrice = 10,
+                ChartPattern = (int)ChartPattern.Flag,
+                StopLoss = 10,
+                TakeProfit = 10,
+                Symbol = "TSLA",
+                Units = 30,
+                InstrumentId = instrumentID
+            };
+            var portfolioId = Guid.NewGuid();
+            var portfolioList = new List<Portfolio>()
+            {
+                new Portfolio
+                {
+                  PortfolioID = portfolioId,
+                  Instruments = new List<PortfolioInstrument>
+                  {
+                    portfolioInstrument
+                  }
+                }
+            };
+            _dbContext.Portfolios.AddRange(CreateDbSet(portfolioList));
+
+
+            var command = new DeletePortfolioInstrument.Command { InstrumentID = instrumentID };
+            var handler = new DeletePortfolioInstrument.Handler(_dbContext);
+
+            //Action
+            var result = await handler.Handle(command, CancellationToken.None);
+
+            //Assert
+            Assert.That(result.Value, Is.EqualTo(Unit.Value));
+        }
+
+        [Test]
+        public async Task DeletePortfolioInstrument_InstrumentIdNotExists_InstrumentRemoved()
+        {
+            //Arrange
+            const int instrumentID = 12345;
+            var portfolioInstrument = new PortfolioInstrument
+            {
+                AvgPrice = 10,
+                ChartPattern = (int)ChartPattern.Flag,
+                StopLoss = 10,
+                TakeProfit = 10,
+                Symbol = "TSLA",
+                Units = 30,
+                InstrumentId = instrumentID
+            };
+            var portfolioId = Guid.NewGuid();
+            var portfolioList = new List<Portfolio>()
+            {
+                new Portfolio
+                {
+                  PortfolioID = portfolioId,
+                  Instruments = new List<PortfolioInstrument>
+                  {
+                    portfolioInstrument
+                  }
+                }
+            };
+            _dbContext.Portfolios.AddRange(CreateDbSet(portfolioList));
+
+
+            var command = new DeletePortfolioInstrument.Command { InstrumentID = instrumentID + 1 };
+            var handler = new DeletePortfolioInstrument.Handler(_dbContext);
+
+            //Action
+            var result = await handler.Handle(command, CancellationToken.None);
+
+            //Assert
+            Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.InstrumentNotFoundError)));
+        }
+        #endregion
     }
 }

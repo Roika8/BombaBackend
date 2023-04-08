@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace BLL.MainPortfolio.Validators
 {
-    public class AddPortfolioInstrumentValidator : ICommandValidator<PortfolioInstrument>
+    public class PortfolioInstrumentValidator : ICommandValidator<PortfolioInstrument>
     {
         public List<ErrorMessage> ValidateCommand(PortfolioInstrument model)
         {

@@ -55,7 +55,12 @@ namespace BLL.PortfolioInstruments
                 if (ValidateInstrumentIsNotAlreadyExists(portfolio, instrument))
                 {
                     portfolio.Instruments.Add(instrument);
-                    await _context.SaveChangesAsync(cancellationToken);
+                    var result = await _context.SaveChangesAsync(cancellationToken) > 0;
+                    if (!result)
+                    {
+                        return Result<PortfolioInstrument>.Failure(ErrorMessage.DatabaseAddRecordError);
+                    }
+                
                     return Result<PortfolioInstrument>.Success(request.Instrument);
                 }
                 errors.Add(ErrorMessage.InstrumentExistsError);
