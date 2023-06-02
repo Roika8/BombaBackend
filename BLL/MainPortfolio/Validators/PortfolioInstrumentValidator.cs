@@ -36,7 +36,7 @@ namespace BLL.MainPortfolio.Validators
         {
             if (avgPrice < 0)
             {
-                return ErrorMessage.AveragePriceError;
+                return ErrorMessage.PriceError;
             }
             return ErrorMessage.NoErrors;
         }

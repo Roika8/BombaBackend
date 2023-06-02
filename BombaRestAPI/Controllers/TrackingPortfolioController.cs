@@ -75,7 +75,7 @@ namespace BombaRestAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTrackingInstrument(Guid portfolioID, TrackingInstrumentDto trackingInstrumentDto)
         {
-            var trackingPricesList = trackingInstrumentDto.TrackingPrices.Select(price =>
+            var trackingPricesList = trackingInstrumentDto.TrackingPrices.Distinct().Select(price =>
                                   new TrackingInstrumentPrice
                                   {
                                       Price = price
@@ -88,10 +88,9 @@ namespace BombaRestAPI.Controllers
             };
 
 
-            trackingInstrument.Portfolio.PortfolioID = portfolioID;
 
 
-            return Ok(await Mediator.Send(new CreateTrackingInstrument.Command { Instrument = trackingInstrument }));
+            return Ok(await Mediator.Send(new CreateTrackingInstrument.Command { Instrument = trackingInstrument, PortfolioId = portfolioID }));
         }
         #endregion
     }

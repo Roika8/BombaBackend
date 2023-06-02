@@ -11,8 +11,8 @@ namespace DATA.Enums
         [Description("Units cannot be less then 1")]
         UnitsError,
 
-        [Description("Average Price cannot be less then 0")]
-        AveragePriceError,
+        [Description("Price cannot be less then 0")]
+        PriceError,
 
         [Description("ChartPattern out of range")]
         ChartPatternError,
@@ -49,5 +49,8 @@ namespace DATA.Enums
 
         [Description("Failed to edit record from DB")]
         DatabaseEditRecordError,
+
+        [Description("History datetime cannot be in the future")]
+        HistoryDatetimeError
     }
 }

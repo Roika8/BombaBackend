@@ -54,11 +54,11 @@ namespace UnitTests
 
                 if (validAveragePrice)
                 {
-                    Assert.That(result.Errors, Does.Not.Contain(ErrorConvertor.ConvertError(ErrorMessage.AveragePriceError)));
+                    Assert.That(result.Errors, Does.Not.Contain(ErrorConvertor.ConvertError(ErrorMessage.PriceError)));
                 }
                 else
                 {
-                    Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.AveragePriceError)));
+                    Assert.That(result.Errors, Does.Contain(ErrorConvertor.ConvertError(ErrorMessage.PriceError)));
                 }
                 if (validSymbol)
                 {

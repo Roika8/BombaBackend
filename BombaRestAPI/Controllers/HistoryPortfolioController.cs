@@ -62,7 +62,7 @@ namespace BombaRestAPI.Controllers
 
         [Route("AddInstrumentToHistory")]
         [HttpPost]
-        public async Task<IActionResult> AddHistoryInstrument(Guid portfolioID, HistoryInstrumentDto historyInstrumentDto)
+        public async Task<IActionResult> AddHistoryInstrument(Guid portfolioID, HistoryInstrumentDto historyInstrumentDto, CancellationToken cancellationToke = default)
         {
             HistoryInstrument historyInstrument = new()
             {
@@ -70,11 +70,10 @@ namespace BombaRestAPI.Controllers
                 ProfitLoss = historyInstrumentDto.ProfitLoss,
                 RequestOccured = historyInstrumentDto.RequestOccured,
                 Units = historyInstrumentDto.Units,
+                Symbol = historyInstrumentDto.Symbol,
             };
-            historyInstrument.Portfolio.PortfolioID = portfolioID;
 
-
-            return Ok(await Mediator.Send(new CreateHistoryInstrument.Command { Instrument = historyInstrument }));
+            return Ok(await Mediator.Send(new CreateHistoryInstrument.Command { Instrument = historyInstrument, PortfolioId = portfolioID }));
         }
         #endregion
 
